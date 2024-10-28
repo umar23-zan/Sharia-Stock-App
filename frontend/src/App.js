@@ -8,6 +8,7 @@ import Design from './components/Design'
 import Dashboard from './components/Dashboard';
 import EditProfile from './components/editprofile';
 import Settings from './components/Settings';
+import  StockDetail  from './components/StockDetail';
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/reset-password/:token" element={<ResetPassword />} />
                     <Route path="/Dashboard" element={<Dashboard />} />
+                    <Route path="/stock/:symbol" element={<StockDetail />} />
                     <Route path="/editprofile" element={<EditProfile />} />
                     <Route path="/settings" element={<Settings />} />
                 </Routes>
