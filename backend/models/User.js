@@ -7,6 +7,16 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
     resetPasswordToken: { type: String },
     resetPasswordExpire: { type: Date },
+    firstName: { type: String },
+    lastName: { type: String },
+    contactNumber: { type: String },
+    address: {
+        doorNo: { type: String },
+        streetName: { type: String },
+        city: { type: String },
+        country: { type: String },
+        pincode: { type: String },
+    },
     
 });
 
