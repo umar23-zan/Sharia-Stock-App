@@ -139,21 +139,22 @@ router.get('/user/:email', async (req, res) => {
 
 // Update User Data Route
 router.put('/user/:email', async (req, res) => {
-    const { email } = req.params;
-    const { name, contactNumber, address } = req.body;
+    const { name, contactNumber, address } = req.body; // Destructure from request body
 
     try {
-        const user = await User.findOne({ email });
-        if (!user) return res.status(404).json({ msg: 'User not found' });
+        const user = await User.findOneAndUpdate(
+            { email: req.params.email }, // Use email from params
+            { name, contactNumber, address }, // Update fields
+            { new: true, runValidators: true } // Return the updated document and validate
+        );
 
-        // Update user fields
-        user.name = name || user.name;
-        user.contactNumber = contactNumber || user.contactNumber;
-        user.address = address || user.address; // Update address fields
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
 
-        await user.save();
         res.status(200).json({ msg: 'User updated successfully', user });
     } catch (error) {
+        console.error(error);
         res.status(500).send('Server error');
     }
 });

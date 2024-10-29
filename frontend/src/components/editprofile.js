@@ -22,19 +22,23 @@ const EditProfile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             if (email) {
-                const userData = await getUserData(email);
-                setUser(userData);
-                setFormData({
-                    name: userData.name,
-                    contactNumber: userData.contactNumber || '',
-                    address: userData.address || {
-                        doorNumber: '',
-                        streetName: '',
-                        city: '',
-                        country: '',
-                        pincode: ''
-                    }
-                });
+                try {
+                    const userData = await getUserData(email);
+                    setUser(userData);
+                    setFormData({
+                        name: userData.name || '',
+                        contactNumber: userData.contactNumber || '',
+                        address: userData.address || {
+                            doorNumber: '',
+                            streetName: '',
+                            city: '',
+                            country: '',
+                            pincode: ''
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                }
             }
         };
         fetchUserData();
@@ -64,8 +68,15 @@ const EditProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await updateUserData(email, formData);
-        setIsEditing(false);
+        try {
+            await updateUserData(email, formData);
+            setIsEditing(false);
+            // Optionally, re-fetch the user data to reflect updates
+            const updatedUserData = await getUserData(email);
+            setUser(updatedUserData);
+        } catch (error) {
+            console.error('Error updating user data:', error);
+        }
     };
 
     return (
