@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
-        res.status(200).json({ msg: 'Login successful' });
+        res.status(200).json({ msg: 'Login successful', email: user.email });
     } catch (error) {
         res.status(500).send('Server error');
     }
@@ -122,6 +122,40 @@ router.post('/reset-password/:token', async (req, res) => {
       console.error(err);
       res.status(500).json({ msg: 'Server error' });
   }
+});
+router.get('/user/:email', async (req, res) => {
+    const { email } = req.params;
+    try {
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ msg: 'User not found' });
+        
+        // Return user data without password
+        const { password, ...userData } = user._doc; // Exclude password from response
+        res.status(200).json(userData);
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+});
+
+// Update User Data Route
+router.put('/user/:email', async (req, res) => {
+    const { email } = req.params;
+    const { name, contactNumber, address } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ msg: 'User not found' });
+
+        // Update user fields
+        user.name = name || user.name;
+        user.contactNumber = contactNumber || user.contactNumber;
+        user.address = address || user.address; // Update address fields
+
+        await user.save();
+        res.status(200).json({ msg: 'User updated successfully', user });
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
 });
 
 module.exports = router;

@@ -17,6 +17,7 @@ const Login = () => {
             const res = await login(formData);
             setAlert({ type: 'success', message: 'Login successful!' });
             console.log(res);
+            localStorage.setItem('userEmail', res.email);
             navigate('/Dashboard');  // Ensure route is defined
             setFormData({ email: '', password: '' });  // Clear form after success
         } catch (error) {

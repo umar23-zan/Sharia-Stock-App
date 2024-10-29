@@ -5,18 +5,16 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    resetPasswordToken: { type: String },
-    resetPasswordExpire: { type: Date },
-    firstName: { type: String },
-    lastName: { type: String },
-    contactNumber: { type: String },
+    contactNumber: { type: String }, // Add contact number field
     address: {
-        doorNo: { type: String },
+        doorNumber: { type: String },
         streetName: { type: String },
         city: { type: String },
         country: { type: String },
-        pincode: { type: String },
+        pincode: { type: String }
     },
+    resetPasswordToken: { type: String },
+    resetPasswordExpire: { type: Date },
     
 });
 
