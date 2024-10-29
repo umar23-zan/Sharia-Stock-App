@@ -138,25 +138,31 @@ router.get('/user/:email', async (req, res) => {
 });
 
 // Update User Data Route
+// Update User Route
 router.put('/user/:email', async (req, res) => {
-    const { name, contactNumber, address } = req.body; // Destructure from request body
+    const { name, email, contactNumber, doorNumber, streetName, city, country, pincode } = req.body;
 
     try {
-        const user = await User.findOneAndUpdate(
-            { email: req.params.email }, // Use email from params
-            { name, contactNumber, address }, // Update fields
-            { new: true, runValidators: true } // Return the updated document and validate
-        );
+        let user = await User.findOne({ email: req.params.email });
+        if (!user) return res.status(404).json({ msg: 'User not found' });
 
-        if (!user) {
-            return res.status(404).json({ msg: 'User not found' });
-        }
+        // Update fields
+        user.name = name || user.name;
+        user.email = email || user.email; // Allow email to be updated
+        user.contactNumber = contactNumber || user.contactNumber;
+        user.doorNumber = doorNumber || user.doorNumber;
+        user.streetName = streetName || user.streetName;
+        user.city = city || user.city;
+        user.country = country || user.country;
+        user.pincode = pincode || user.pincode;
 
+        await user.save();
         res.status(200).json({ msg: 'User updated successfully', user });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
     }
 });
+
 
 module.exports = router;

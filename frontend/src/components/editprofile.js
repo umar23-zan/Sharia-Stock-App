@@ -6,39 +6,32 @@ const EditProfile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
+        email: '', // Added email field
         contactNumber: '',
-        address: {
-            doorNumber: '',
-            streetName: '',
-            city: '',
-            country: '',
-            pincode: ''
-        }
+        doorNumber: '',  // Individual address fields
+        streetName: '',
+        city: '',
+        country: '',
+        pincode: ''
     });
 
-    // Get email from local storage
     const email = localStorage.getItem('userEmail');
 
     useEffect(() => {
         const fetchUserData = async () => {
             if (email) {
-                try {
-                    const userData = await getUserData(email);
-                    setUser(userData);
-                    setFormData({
-                        name: userData.name || '',
-                        contactNumber: userData.contactNumber || '',
-                        address: userData.address || {
-                            doorNumber: '',
-                            streetName: '',
-                            city: '',
-                            country: '',
-                            pincode: ''
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error fetching user data:', error);
-                }
+                const userData = await getUserData(email);
+                setUser(userData);
+                setFormData({
+                    name: userData.name,
+                    email: userData.email, // Set email from user data
+                    contactNumber: userData.contactNumber || '',
+                    doorNumber: userData.doorNumber || '',
+                    streetName: userData.streetName || '',
+                    city: userData.city || '',
+                    country: userData.country || '',
+                    pincode: userData.pincode || ''
+                });
             }
         };
         fetchUserData();
@@ -50,33 +43,16 @@ const EditProfile = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name in formData.address) {
-            setFormData(prevState => ({
-                ...prevState,
-                address: {
-                    ...prevState.address,
-                    [name]: value
-                }
-            }));
-        } else {
-            setFormData(prevState => ({
-                ...prevState,
-                [name]: value
-            }));
-        }
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await updateUserData(email, formData);
-            setIsEditing(false);
-            // Optionally, re-fetch the user data to reflect updates
-            const updatedUserData = await getUserData(email);
-            setUser(updatedUserData);
-        } catch (error) {
-            console.error('Error updating user data:', error);
-        }
+        await updateUserData(email, formData);
+        setIsEditing(false);
     };
 
     return (
@@ -96,6 +72,13 @@ const EditProfile = () => {
                     />
                     <input
                         type="text"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email" // New input for email
+                    />
+                    <input
+                        type="text"
                         name="contactNumber"
                         value={formData.contactNumber}
                         onChange={handleChange}
@@ -105,35 +88,35 @@ const EditProfile = () => {
                     <input
                         type="text"
                         name="doorNumber"
-                        value={formData.address.doorNumber}
+                        value={formData.doorNumber}
                         onChange={handleChange}
                         placeholder="Door Number"
                     />
                     <input
                         type="text"
                         name="streetName"
-                        value={formData.address.streetName}
+                        value={formData.streetName}
                         onChange={handleChange}
                         placeholder="Street Name"
                     />
                     <input
                         type="text"
                         name="city"
-                        value={formData.address.city}
+                        value={formData.city}
                         onChange={handleChange}
                         placeholder="City"
                     />
                     <input
                         type="text"
                         name="country"
-                        value={formData.address.country}
+                        value={formData.country}
                         onChange={handleChange}
                         placeholder="Country"
                     />
                     <input
                         type="text"
                         name="pincode"
-                        value={formData.address.pincode}
+                        value={formData.pincode}
                         onChange={handleChange}
                         placeholder="Pincode"
                     />
