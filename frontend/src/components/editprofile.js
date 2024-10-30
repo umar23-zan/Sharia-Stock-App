@@ -51,9 +51,36 @@ const EditProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await updateUserData(email, formData);
-        setIsEditing(false);
+        try {
+            // Update user data in the backend
+            await updateUserData(email, formData);
+    
+            // Update local storage with the new email
+            localStorage.setItem('userEmail', formData.email);
+    
+            // Optionally, fetch the updated user data
+            const updatedUserData = await getUserData(formData.email);
+            setUser(updatedUserData);
+    
+            // Update formData state
+            setFormData(prevState => ({
+                ...prevState,
+                // Keep other fields intact
+                name: updatedUserData.name,
+                contactNumber: updatedUserData.contactNumber || '',
+                doorNumber: updatedUserData.doorNumber || '',
+                streetName: updatedUserData.streetName || '',
+                city: updatedUserData.city || '',
+                country: updatedUserData.country || '',
+                pincode: updatedUserData.pincode || ''
+            }));
+    
+            setIsEditing(false); // Exit editing mode after saving
+        } catch (error) {
+            console.error('Error updating user data:', error);
+        }
     };
+    
 
     return (
         <div>

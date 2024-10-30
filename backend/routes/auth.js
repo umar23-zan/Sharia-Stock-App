@@ -139,30 +139,40 @@ router.get('/user/:email', async (req, res) => {
 
 // Update User Data Route
 // Update User Route
+// Example of the updateUserData function
 router.put('/user/:email', async (req, res) => {
-    const { name, email, contactNumber, doorNumber, streetName, city, country, pincode } = req.body;
+    const email = req.params.email;
+    const { name, contactNumber, doorNumber, streetName, city, country, pincode } = req.body;
 
     try {
-        let user = await User.findOne({ email: req.params.email });
+        // Update the user data
+        const user = await User.findOneAndUpdate(
+            { email },
+            { name, contactNumber, doorNumber, streetName, city, country, pincode },
+            { new: true } // Return the updated document
+        );
+
         if (!user) return res.status(404).json({ msg: 'User not found' });
 
-        // Update fields
-        user.name = name || user.name;
-        user.email = email || user.email; // Allow email to be updated
-        user.contactNumber = contactNumber || user.contactNumber;
-        user.doorNumber = doorNumber || user.doorNumber;
-        user.streetName = streetName || user.streetName;
-        user.city = city || user.city;
-        user.country = country || user.country;
-        user.pincode = pincode || user.pincode;
-
-        await user.save();
-        res.status(200).json({ msg: 'User updated successfully', user });
+        res.json({
+            msg: 'User updated successfully',
+            user: {
+                name: user.name,
+                email: user.email,
+                contactNumber: user.contactNumber,
+                doorNumber: user.doorNumber,
+                streetName: user.streetName,
+                city: user.city,
+                country: user.country,
+                pincode: user.pincode,
+            }
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
     }
 });
+
 
 
 module.exports = router;
