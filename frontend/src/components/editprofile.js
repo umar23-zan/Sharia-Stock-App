@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getUserData, updateUserData, uploadProfilePicture } from '../api/auth';
+import { Link } from 'react-router-dom';
 
 const EditProfile = () => {
     const [user, setUser] = useState({});
     const [isEditing, setIsEditing] = useState(false);
+    const [isDropdownOpen, setDropdownOpen] = useState(false); // For user profile dropdown
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         contactNumber: '',
@@ -65,9 +68,76 @@ const EditProfile = () => {
         setUser(updatedUserData);
     };
 
+    const toggleDropdown = () => {
+        setDropdownOpen((prev) => !prev);
+      };
+    
+      const toggleSidebar = () => {
+        setSidebarOpen((prev) => !prev);
+      };
+
     return (
         <div>
-            <h2>Edit Profile</h2>
+            <nav className="navbar">
+                <div className="header-icons">
+                {/* List icon to toggle sidebar */}
+                <i className="fas fa-list" onClick={toggleSidebar}></i>
+                <div className="logo">ShariaStock</div>
+                </div>
+
+                <div className="user-icon" onClick={toggleDropdown}>
+                <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" className="profile-pic" /> {/* Profile Picture */}
+                <div className='user-info'>
+                <p>{user.name}</p>
+                </div>
+                
+                </div>
+            </nav>
+
+            {/* User profile dropdown */}
+            {isDropdownOpen && (
+                <div className="profile-dropdown">
+                <div className='profile-section'>
+                <div className='profile-pic'>
+                {user.profilePicture && (
+                    <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" className="dropdown-profile-pic" />
+                )}
+                <div className='profile-info'>
+                    <p>{user.name}</p>
+                    <p>{user.email}</p>
+                
+                </div>
+                
+                </div>
+                    <button className="premium-btn">Go Premium</button>
+                </div>
+                <div className='edit-profile'>
+                    <Link to="/editprofile">Edit Profile</Link>
+                </div>
+                <div className='setting'>
+                    <Link to="/settings">Settings</Link>
+                </div>
+                <div>
+                    <button className="logout-btn">Logout</button>
+                </div>
+                
+                </div>
+            )}
+            {isSidebarOpen && (
+                <div className="sidebar">
+                    <ul className="sidebar-links">
+                    <li><i className="fas fa-tachometer-alt"></i> Dashboard</li>
+                    <li><i className="fas fa-eye"></i> Watchlist</li>
+                    <li><i className="fas fa-briefcase"></i> Portfolio</li>
+                    </ul>
+                    <div className="market-overview">
+                    <h4>Market Overview</h4>
+                    <p>NSE <span className="red">25,0625</span></p>
+                    <p>BSE <span className="green">25,0545</span></p>
+                    </div>
+                </div>
+            )}
+            <h2>Profile</h2>
             <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" width={100} height={100} />
             <p>Name: {user.name}</p>
             <p>Email: {user.email}</p>

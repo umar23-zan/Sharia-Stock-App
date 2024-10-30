@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../dashboard.css'; // Import the CSS file
 import { useNavigate } from 'react-router-dom';
+import { getUserData } from '../api/auth';
 
 
 
@@ -12,7 +13,21 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
+  const [user, setUser] = useState({});
   const navigate = useNavigate(); // Initialize useNavigate
+
+  const email = localStorage.getItem('userEmail'); 
+
+  // Fetch user data on component mount
+  useEffect(() => {
+    if (email) {
+      const fetchData = async () => {
+        const userData = await getUserData(email);
+        setUser(userData);
+      };
+      fetchData();
+    }
+  }, [email]);
 
   const companies = [
     { symbol: "RELIANCE.NSE", name: "Reliance Industries Ltd" },
@@ -119,32 +134,45 @@ const Dashboard = () => {
           <div className="logo">ShariaStock</div>
         </div>
 
-        <div className="user-icon" onClick={toggleDropdown} >
-          <i className="fas fa-user"></i>
+        <div className="user-icon" onClick={toggleDropdown}>
+          <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" className="profile-pic" /> {/* Profile Picture */}
+          <div className='user-info'>
+          <p>{user.name}</p>
+          </div>
+          
         </div>
       </nav>
 
       {/* User profile dropdown */}
       {isDropdownOpen && (
         <div className="profile-dropdown">
-          <p>Name</p>
+          <div className='profile-section'>
+          <div className='profile-pic'>
+          {user.profilePicture && (
+            <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" className="dropdown-profile-pic" />
+          )}
+          <div className='profile-info'>
+          <p>{user.name}</p>
+          <p>{user.email}</p>
+          
+          </div>
+          
+          </div>
           <button className="premium-btn">Go Premium</button>
-          <ul>
-            <li>
-              <Link to="/editprofile">Edit Profile</Link> {/* Use Link here */}
-            </li>
-            <li>
-              <Link to="/settings">Settings</Link> {/* Use Link here */}
-            </li>
-          </ul>
+          </div>
+          <div className='edit-profile'>
+          <Link to="/editprofile">Edit Profile</Link>
+          </div>
+          <div className='setting'>
+          <Link to="/settings">Settings</Link>
+          </div>
+          <div>
           <button className="logout-btn">Logout</button>
+          </div>
+          
         </div>
       )}
-
-      {/* Main Content */}
-      <div className="main-content">
-        {/* Sidebar - only show if isSidebarOpen is true */}
-        {isSidebarOpen && (
+      {isSidebarOpen && (
           <div className="sidebar">
             <ul className="sidebar-links">
               <li><i className="fas fa-tachometer-alt"></i> Dashboard</li>
@@ -158,6 +186,10 @@ const Dashboard = () => {
             </div>
           </div>
         )}
+
+      {/* Main Content */}
+      <div className="main-content">
+        {/* Sidebar - only show if isSidebarOpen is true */}
         <div className='stock-container'>
         <h1 className="stock-search-title">Stock Search</h1>
         <form className="search-form" onSubmit={handleSearch}>
