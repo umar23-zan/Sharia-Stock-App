@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
     city: { type: String },
     country: { type: String },
     pincode: { type: String },
+    profilePicture: { type: String },
     resetPasswordToken: { type: String },
     resetPasswordExpire: { type: Date },
 });
