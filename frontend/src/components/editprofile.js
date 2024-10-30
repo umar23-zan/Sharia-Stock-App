@@ -6,15 +6,15 @@ const EditProfile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
-        email: '', // Added email field
         contactNumber: '',
-        doorNumber: '',  // Individual address fields
+        doorNumber: '',
         streetName: '',
         city: '',
         country: '',
         pincode: ''
     });
 
+    // Get email from local storage
     const email = localStorage.getItem('userEmail');
 
     useEffect(() => {
@@ -24,7 +24,6 @@ const EditProfile = () => {
                 setUser(userData);
                 setFormData({
                     name: userData.name,
-                    email: userData.email, // Set email from user data
                     contactNumber: userData.contactNumber || '',
                     doorNumber: userData.doorNumber || '',
                     streetName: userData.streetName || '',
@@ -51,42 +50,21 @@ const EditProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            // Update user data in the backend
-            await updateUserData(email, formData);
-    
-            // Update local storage with the new email
-            localStorage.setItem('userEmail', formData.email);
-    
-            // Optionally, fetch the updated user data
-            const updatedUserData = await getUserData(formData.email);
-            setUser(updatedUserData);
-    
-            // Update formData state
-            setFormData(prevState => ({
-                ...prevState,
-                // Keep other fields intact
-                name: updatedUserData.name,
-                contactNumber: updatedUserData.contactNumber || '',
-                doorNumber: updatedUserData.doorNumber || '',
-                streetName: updatedUserData.streetName || '',
-                city: updatedUserData.city || '',
-                country: updatedUserData.country || '',
-                pincode: updatedUserData.pincode || ''
-            }));
-    
-            setIsEditing(false); // Exit editing mode after saving
-        } catch (error) {
-            console.error('Error updating user data:', error);
-        }
+        await updateUserData(email, formData);
+        setIsEditing(false);
+        const updatedUserData = await getUserData(email); // Refresh data after save
+        setUser(updatedUserData);
     };
-    
 
     return (
         <div>
             <h2>Edit Profile</h2>
             <p>Name: {user.name}</p>
             <p>Email: {user.email}</p>
+            <p>Contact Number: {user.contactNumber}</p>
+            <p>Address:</p>
+            <p>{user.doorNumber}, {user.streetName}</p>
+            <p>{user.city}, {user.country} - {user.pincode}</p>
             <button onClick={handleEditClick}>Edit</button>
             {isEditing && (
                 <form onSubmit={handleSubmit}>
@@ -96,13 +74,6 @@ const EditProfile = () => {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Name"
-                    />
-                    <input
-                        type="text"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Email" // New input for email
                     />
                     <input
                         type="text"
