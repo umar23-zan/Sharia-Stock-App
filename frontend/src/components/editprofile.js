@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserData, updateUserData } from '../api/auth';
+import { getUserData, updateUserData, uploadProfilePicture } from '../api/auth';
 
 const EditProfile = () => {
     const [user, setUser] = useState({});
@@ -13,7 +13,7 @@ const EditProfile = () => {
         country: '',
         pincode: ''
     });
-
+    const [profilePicture, setProfilePicture] = useState(null);
     // Get email from local storage
     const email = localStorage.getItem('userEmail');
 
@@ -31,6 +31,7 @@ const EditProfile = () => {
                     country: userData.country || '',
                     pincode: userData.pincode || ''
                 });
+                setProfilePicture(userData.profilePicture || '');
             }
         };
         fetchUserData();
@@ -48,9 +49,17 @@ const EditProfile = () => {
         }));
     };
 
+    const handleFileChange = (e) => setProfilePicture(e.target.files[0]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         await updateUserData(email, formData);
+        if (profilePicture) {
+            const formData = new FormData();
+            formData.append('profilePicture', profilePicture);
+            formData.append('email', email);
+            await uploadProfilePicture(formData);
+        }
         setIsEditing(false);
         const updatedUserData = await getUserData(email); // Refresh data after save
         setUser(updatedUserData);
@@ -59,6 +68,7 @@ const EditProfile = () => {
     return (
         <div>
             <h2>Edit Profile</h2>
+            <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" width={100} height={100} />
             <p>Name: {user.name}</p>
             <p>Email: {user.email}</p>
             <p>Contact Number: {user.contactNumber}</p>
@@ -68,6 +78,7 @@ const EditProfile = () => {
             <button onClick={handleEditClick}>Edit</button>
             {isEditing && (
                 <form onSubmit={handleSubmit}>
+                    <input type="file" onChange={handleFileChange} />
                     <input
                         type="text"
                         name="name"

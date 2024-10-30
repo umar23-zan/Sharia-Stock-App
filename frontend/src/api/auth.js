@@ -29,3 +29,9 @@ export const updateUserData = async (email, data) => {
   const res = await axios.put(`/api/auth/user/${email}`, data);
   return res.data;
 };
+
+export const uploadProfilePicture = async (formData) => {
+  return await axios.post('/api/auth/upload-profile-picture', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+  });
+};

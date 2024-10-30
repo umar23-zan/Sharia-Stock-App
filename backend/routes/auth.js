@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
 
 // Signup Route
 router.post('/signup', async (req, res) => {
@@ -173,6 +175,30 @@ router.put('/user/:email', async (req, res) => {
     }
 });
 
+// Configure multer storage
+const storage = multer.diskStorage({
+    destination: './uploads/profilePictures',  // Specify the upload directory
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
 
+const upload = multer({ storage });
+// Route to upload profile picture
+router.post('/upload-profile-picture', upload.single('profilePicture'), async (req, res) => {
+    try {
+        const email = req.body.email;
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ msg: 'User not found' });
+
+        user.profilePicture = req.file.path;  // Save the file path to profilePicture
+        await user.save();
+
+        res.json({ msg: 'Profile picture uploaded successfully', profilePicture: user.profilePicture });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
 
 module.exports = router;
