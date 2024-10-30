@@ -17,6 +17,8 @@ const EditProfile = () => {
         pincode: ''
     });
     const [profilePicture, setProfilePicture] = useState(null);
+    const [profilePreview, setProfilePreview] = useState(null); // State for preview
+
     const email = localStorage.getItem('userEmail');
 
     useEffect(() => {
@@ -45,6 +47,7 @@ const EditProfile = () => {
 
     const handleCancelClick = () => {
         setIsEditing(false);
+        setProfilePreview(null); // Reset preview on cancel
     };
 
     const handleChange = (e) => {
@@ -55,7 +58,11 @@ const EditProfile = () => {
         }));
     };
 
-    const handleFileChange = (e) => setProfilePicture(e.target.files[0]);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setProfilePicture(file);
+        setProfilePreview(URL.createObjectURL(file)); // Generate preview URL
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -69,6 +76,7 @@ const EditProfile = () => {
         setIsEditing(false);
         const updatedUserData = await getUserData(email);
         setUser(updatedUserData);
+        setProfilePreview(null); // Clear preview after save
     };
 
     const toggleDropdown = () => {
@@ -145,6 +153,7 @@ const EditProfile = () => {
                 </div>
             ) : (
                 <form onSubmit={handleSubmit}>
+                    {profilePreview && <img src={profilePreview} alt="Profile Preview" width={100} height={100} />}
                     <input type="file" onChange={handleFileChange} />
                     <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
                     <input type="text" name="contactNumber" value={formData.contactNumber} onChange={handleChange} placeholder="Contact Number" />
