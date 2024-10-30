@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getUserData, updateUserData, uploadProfilePicture } from '../api/auth';
 import { Link } from 'react-router-dom';
+import '../editprofile.css'
 
 const EditProfile = () => {
     const [user, setUser] = useState({});
@@ -17,7 +18,7 @@ const EditProfile = () => {
         pincode: ''
     });
     const [profilePicture, setProfilePicture] = useState(null);
-    const [profilePreview, setProfilePreview] = useState(null); // State for preview
+    const [profilePreview, setProfilePreview] = useState(null); // Initialize with null
 
     const email = localStorage.getItem('userEmail');
 
@@ -36,6 +37,7 @@ const EditProfile = () => {
                     pincode: userData.pincode || ''
                 });
                 setProfilePicture(userData.profilePicture || '');
+                setProfilePreview(`http://localhost:5000/${userData.profilePicture}`); // Set initial preview
             }
         };
         fetchUserData();
@@ -47,7 +49,7 @@ const EditProfile = () => {
 
     const handleCancelClick = () => {
         setIsEditing(false);
-        setProfilePreview(null); // Reset preview on cancel
+        setProfilePreview(`http://localhost:5000/${user.profilePicture}`); // Reset to current profile picture on cancel
     };
 
     const handleChange = (e) => {
@@ -61,7 +63,7 @@ const EditProfile = () => {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setProfilePicture(file);
-        setProfilePreview(URL.createObjectURL(file)); // Generate preview URL
+        setProfilePreview(URL.createObjectURL(file)); // Generate preview URL for new image
     };
 
     const handleSubmit = async (e) => {
@@ -76,7 +78,7 @@ const EditProfile = () => {
         setIsEditing(false);
         const updatedUserData = await getUserData(email);
         setUser(updatedUserData);
-        setProfilePreview(null); // Clear preview after save
+        setProfilePreview(`http://localhost:5000/${updatedUserData.profilePicture}`); // Update preview after save
     };
 
     const toggleDropdown = () => {
@@ -138,33 +140,83 @@ const EditProfile = () => {
                 </div>
             )}
 
-            <h2>Profile</h2>
             
+            <h2>Profile</h2>
             {!isEditing ? (
-                <div>
-                    <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" width={100} height={100} />
-                    <p>Name: {user.name}</p>
-                    <p>Email: {user.email}</p>
-                    <p>Contact Number: {user.contactNumber}</p>
-                    <p>Address:</p>
-                    <p>{user.doorNumber}, {user.streetName}</p>
-                    <p>{user.city}, {user.country} - {user.pincode}</p>
-                    <button onClick={handleEditClick}>Edit</button>
+                <div className='display-info'>
+                    
+                    <div className='image-editbtn'>
+                        <img src={profilePreview} alt="Profile" width={100} height={100} />
+                        <button onClick={handleEditClick}>Edit</button>
+                    </div>
+                    <div className='info'>
+                        <p><strong>Name:</strong> {user.name}</p>
+                        <p><strong>Email:</strong> {user.email}</p>
+                        <p><strong>Contact Number:</strong> {user.contactNumber}</p>
+                    </div>
+                    <div className='address-section'>
+                        <div className='address-title'>
+                        <p><strong>Address:</strong></p>
+                        </div>
+                        <div className='address-info'>
+                            <p>{user.doorNumber}, {user.streetName}</p>
+                            <p>{user.city}, {user.country} - {user.pincode}</p>
+                        </div>
+                        
+                    
+                    </div>
+                    
                 </div>
             ) : (
+                
                 <form onSubmit={handleSubmit}>
-                    {profilePreview && <img src={profilePreview} alt="Profile Preview" width={100} height={100} />}
-                    <input type="file" onChange={handleFileChange} />
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
-                    <input type="text" name="contactNumber" value={formData.contactNumber} onChange={handleChange} placeholder="Contact Number" />
-                    <h3>Address</h3>
-                    <input type="text" name="doorNumber" value={formData.doorNumber} onChange={handleChange} placeholder="Door Number" />
-                    <input type="text" name="streetName" value={formData.streetName} onChange={handleChange} placeholder="Street Name" />
-                    <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" />
-                    <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" />
-                    <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" />
-                    <button type="submit">Save</button>
-                    <button type="button" onClick={handleCancelClick}>Cancel</button>
+                    <div className='image-component'>
+                    <h3>Profile Picture</h3>
+                    <div className='image-section'>
+                        
+                        {profilePreview && <img src={profilePreview} alt="Profile Preview" width={100} height={100} />}
+                        
+                        <input type="file" onChange={handleFileChange} />
+                    </div>
+                    </div>
+                    
+                    <div className='details'>
+                        <h3>Name</h3>
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
+                        <h3>Contact Number</h3>
+                        <input type="text" name="contactNumber" value={formData.contactNumber} onChange={handleChange} placeholder="Contact Number" />
+                    </div>
+                    <div className='Address-section'>
+                        <h4>Address</h4>
+                        <h3>Door Number</h3>
+                        <input type="text" name="doorNumber" value={formData.doorNumber} onChange={handleChange} placeholder="Door Number" />
+                        <h3>Street Name</h3>
+                        <input type="text" name="streetName" value={formData.streetName} onChange={handleChange} placeholder="Street Name" />
+                        <div className='Region-section'>
+                            <div className='city'>
+                            <h3>City</h3>
+                            <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" />
+                            </div>
+                            <div>
+                            <h3>Country</h3>
+                            <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" />
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        <div className='handle-section'>
+                            <div>
+                            <h3>Pincode</h3>
+                            <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" />
+                            </div>
+                            
+                            <button type="submit">Save</button>
+                            <button type="button" onClick={handleCancelClick}>Cancel</button>
+                        </div>
+                       
+                    </div>
+                    
                 </form>
             )}
         </div>

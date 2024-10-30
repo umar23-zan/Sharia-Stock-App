@@ -1,96 +1,160 @@
-
-
-
-.edit-profile-container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+h2{
+  font-size: xx-large;
+  margin: 10px;
 }
 
-h2 {
-  margin: 0;
-}
-
-.edit-profile-header {
+.display-info{
   display: flex;
+  flex-direction: column;
+  border-width: 1px;
+  border-style: solid;
+  border-color: darkgrey;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.image-editbtn{
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: top;
+  margin: 10px;
 }
 
-.profile-picture {
+.image-editbtn img{
+  border-width: 1px;
+  border-style: solid;
+  border-color: gray;
+  border-radius: 500px;
+  width: 150px;
+  height: 150px;
+}
+
+.image-editbtn button{
+  background-color: #00A86B;
+  width: 70px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+}
+
+.info{
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  margin: 10px;
+
 }
 
-.profile-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
+.address-section{
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+
 }
 
-.edit-profile-form {
+.address-title{
+  margin-right: 10px;
+}
+
+.address-info{
   display: flex;
   flex-direction: column;
 }
 
-.form-row {
+form{
   display: flex;
-  justify-content: space-between;
-}
-
-.form-group {
-  flex: 1;
-  margin-bottom: 15px;
-  padding: 0 10px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.form-group input {
-  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: gray;
+  border-radius: 10px;
+  margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
-
-.form-actions {
+.image-component{
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: left;
+}
+.image-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
 }
 
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.image-section img{
+  border-width: 1px;
+  border-style: solid;
+  border-color: gray;
+  border-radius: 500px;
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
 }
 
-.cancel-btn {
-  background-color: #f5f5f5;
-  color: #333;
+.image-section input{
+  padding-top: 8px;
+  padding-left: 5px;
 }
 
-.save-btn {
-  background-color: #ff6b01;
-  color: white;
+.details{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
 }
 
-button:hover {
-  opacity: 0.9;
+.details h3{
+  margin: 0;
+}
+.details input{
+  width: 700px;
+  text-align: center;
 }
 
-.success-message {
-  color: green;
-  margin-top: 15px;
-  font-size: 16px;
+.Address-section{
+  display: flex;
+  flex-direction: column;
+}
+
+.Address-section h3{
+  margin: 0;
+}
+.Address-section input{
+  width: 700px;
+  text-align: center;
+}
+
+.Region-section{
+  display: flex;
+  flex-direction: row;
+  
+}
+.Region-section input{
+  width: 300px;
+  text-align: center;
+}
+
+
+.city{
+  margin-right: 90px;
+}
+
+.handle-section{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.handle-section input{
+  width: 300px;
+  text-align: center;
+  margin: 0;
+  
+}
+
+.handle-section button{
+  margin-left: 10px;
+  margin-right: 10px;
 }
