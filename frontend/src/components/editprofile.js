@@ -169,7 +169,7 @@ const EditProfile = () => {
                 </div>
             ) : (
                 
-                <form onSubmit={handleSubmit}>
+                <form className='Edit-profile' onSubmit={handleSubmit}>
                     <div className='image-component'>
                     <h3>Profile Picture</h3>
                     <div className='image-section'>

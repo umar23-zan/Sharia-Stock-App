@@ -61,7 +61,7 @@ h2{
   flex-direction: column;
 }
 
-form{
+.Edit-profile{
   display: flex;
   flex-direction: column;
   align-items: center;
