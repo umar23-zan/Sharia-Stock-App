@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import '../dashboard.css'; // Import the CSS file
 import { useNavigate } from 'react-router-dom';
 import { getUserData } from '../api/auth';
+import account from '../images/account-icon.svg';
+import logout from '../images/logout.svg';
+
 
 
 
@@ -147,26 +150,23 @@ const Dashboard = () => {
       {isDropdownOpen && (
         <div className="profile-dropdown">
           <div className='profile-section'>
-          <div className='profile-pic'>
-          {user.profilePicture && (
-            <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" className="dropdown-profile-pic" />
-          )}
+          
           <div className='profile-info'>
-          <p>{user.name}</p>
-          <p>{user.email}</p>
+          <p className='profile-username'><strong>{user.name}</strong></p>
+          <p className='profile-email'>{user.email}</p>
           
           </div>
           
           </div>
-          <button className="premium-btn">Go Premium</button>
+          
+          
+          <div className='edit-profile-section'>
+            <img src={account} alt="account" />
+          <Link to="/editprofile"><strong>Profile</strong></Link>
           </div>
-          <div className='edit-profile'>
-          <Link to="/editprofile">Edit Profile</Link>
-          </div>
-          <div className='setting'>
-          <Link to="/settings">Settings</Link>
-          </div>
-          <div>
+          
+          <div className='logout-section'>
+            <img src={logout} alt="logout" />
           <button className="logout-btn">Logout</button>
           </div>
           
