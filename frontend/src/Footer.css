@@ -1,0 +1,99 @@
+.footer {
+  display: flex;
+  justify-content: space-between; /* Space between left, center, and right sections */
+  align-items: flex-start; /* Align items at the start */
+  background-color: #002d62;
+  color: white;
+  padding: 10px; /* Reduced padding */
+  position: fixed; /* Fix the footer at the bottom */
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column; /* Stack newsletter and copyright */
+  align-items: center; /* Center the newsletter */
+}
+
+.footer-center {
+  display: flex;
+  flex-direction: column; /* Stack company info */
+  align-items: center; /* Center the company info */
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column; /* Stack social links */
+  align-items: flex-start; /* Align social links to the left */
+  margin-right: 50px;
+}
+
+.newsletter {
+  margin-bottom: 10px; /* Space between newsletter and copyright */
+}
+
+.company-info ul,
+.footer-right ul {
+  list-style: none;
+  padding: 0;
+}
+
+.company-info ul li,
+.footer-right ul li {
+  margin-bottom: 5px; /* Reduced margin */
+}
+
+.footer-right ul li {
+  display: flex;
+  align-items: center; /* Align icons with text */
+}
+
+.footer-right ul li i {
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.footer-center ul li {
+  cursor: pointer; /* Change the cursor to pointer */
+  list-style: none; /* Remove bullet points if you want */
+}
+
+.footer-center ul li:hover {
+  text-decoration: underline; /* Optional: add underline on hover */
+}
+
+.footer-right a {
+  color: inherit; /* Inherit color from the parent element */
+  text-decoration: none; /* Remove underline */
+}
+
+.footer-right a:hover {
+  text-decoration: underline; /* Optional: underline on hover for better UX */
+}
+
+
+/* profile.css */
+.newsletter {
+  margin: 20px 0;
+}
+
+.newsletter input[type="email"] {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.newsletter button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.newsletter button:hover {
+  background-color: #0056b3; /* Darker shade for hover effect */
+}

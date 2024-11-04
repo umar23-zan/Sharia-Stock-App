@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../dashboard.css'; // Import the CSS file
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getUserData } from '../api/auth';
 import account from '../images/account-icon.svg';
 import logout from '../images/logout.svg';
+import Footer from './Footer';
 
 
 
@@ -18,6 +19,8 @@ const Dashboard = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [user, setUser] = useState({});
   const navigate = useNavigate(); // Initialize useNavigate
+
+  // 
 
   const email = localStorage.getItem('userEmail'); 
 
@@ -223,35 +226,7 @@ const Dashboard = () => {
 
       
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-left">
-          <div className="newsletter">
-            <h4>Newsletter</h4>
-            <input type="email" placeholder="Your email" />
-            <p>&copy; 2024 ShariaStock. All rights reserved.</p>
-          </div>
-        </div>
-        <div className="footer-center">
-          <div className="company-info">
-            <h4>ShariaStock</h4>
-            <ul>
-              <li>About us</li>
-              <li>Legal information</li>
-              <li>Privacy policy</li>
-              <li>Contact us</li>
-            </ul>
-          </div>
-        </div>
-        <div className="footer-right">
-          <h4>Social Links</h4>
-          <ul>
-            <li><i className="fab fa-linkedin"></i> LinkedIn</li>
-            <li><i className="fab fa-facebook"></i> Facebook</li>
-            <li><i className="fab fa-instagram"></i> Instagram</li>
-            <li><i className="fab fa-youtube"></i> YouTube</li>
-          </ul>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

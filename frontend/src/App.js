@@ -9,6 +9,10 @@ import Dashboard from './components/Dashboard';
 import EditProfile from './components/editprofile';
 import Settings from './components/Settings';
 import  StockDetail  from './components/StockDetail';
+import AboutUs from './components/AboutUs';
+import Legal from './components/Legal';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import ContactUs from './components/ContactUs';
 
 const App = () => {
     return (
@@ -23,6 +27,10 @@ const App = () => {
                     <Route path="/Dashboard" element={<Dashboard />} />
                     <Route path="/stock/:symbol" element={<StockDetail />} />
                     <Route path="/editprofile" element={<EditProfile />} />
+                    <Route path="/legal" element={<Legal />} />
+                    <Route path="/aboutus" element={<AboutUs />} />
+                    <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                    <Route path="/contactus" element={<ContactUs />} />
                     <Route path="/settings" element={<Settings />} />
                 </Routes>
             </div>
