@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import { useParams, useLocation } from 'react-router-dom';
 import '../StockDetail.css';
+import Header from './Header';
 
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -131,10 +132,7 @@ const StockDetail=() => {
 
   return (
     <div className="stock-detail-container">
-      <div className='header'>
-        <h2 className='header-title'>ShariaStock</h2>
-        
-      </div>
+      <Header />
       <br />
       {stockData && (
         <>
