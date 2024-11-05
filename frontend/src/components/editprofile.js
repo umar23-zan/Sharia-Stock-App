@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getUserData, updateUserData, uploadProfilePicture } from '../api/auth';
 import { Link } from 'react-router-dom';
 import '../editprofile.css';
+import Header from './Header';
 
 const EditProfile = () => {
     const [user, setUser] = useState({});
@@ -80,7 +81,9 @@ const EditProfile = () => {
     };
 
     return (
-        <div className="edit-profile-container">
+        <div>
+            <Header />
+            <div className="edit-profile-container">
             <h2>Profile</h2>
             <div className="profile-form-container">
                 {!isEditing ? (
@@ -156,6 +159,8 @@ const EditProfile = () => {
                 )}
             </div>
         </div>
+        </div>
+        
     );
 };
 

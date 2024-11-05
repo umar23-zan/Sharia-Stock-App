@@ -1,39 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import '../dashboard.css'; // Import the CSS file
-import { useNavigate, useLocation } from 'react-router-dom';
-import { getUserData } from '../api/auth';
-import account from '../images/account-icon.svg';
-import logout from '../images/logout.svg';
+import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 import Footer from './Footer';
 
-
-
-
 const Dashboard = () => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false); // For user profile dropdown
-  const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar initially hidden
   const [searchSymbol, setSearchSymbol] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
-  const [user, setUser] = useState({});
   const navigate = useNavigate(); // Initialize useNavigate
-
-  // 
-
-  const email = localStorage.getItem('userEmail'); 
-
-  // Fetch user data on component mount
-  useEffect(() => {
-    if (email) {
-      const fetchData = async () => {
-        const userData = await getUserData(email);
-        setUser(userData);
-      };
-      fetchData();
-    }
-  }, [email]);
 
   const companies = [
     { symbol: "RELIANCE.NSE", name: "Reliance Industries Ltd" },
@@ -122,74 +98,11 @@ const Dashboard = () => {
     navigate(`/stock/${symbol}`, { state: { name } }); // Navigate to stock detail page
   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev);
-  };
-
-  const toggleSidebar = () => {
-    setSidebarOpen((prev) => !prev);
-  };
+  
 
   return (
     <div className="App">
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="header-icons">
-          {/* List icon to toggle sidebar */}
-          <i className="fas fa-list" onClick={toggleSidebar}></i>
-          <div className="logo">ShariaStock</div>
-        </div>
-
-        <div className="user-icon" onClick={toggleDropdown}>
-          <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" className="profile-pic" /> {/* Profile Picture */}
-          <div className='user-info'>
-          <p>{user.name}</p>
-          </div>
-          
-        </div>
-      </nav>
-
-      {/* User profile dropdown */}
-      {isDropdownOpen && (
-        <div className="profile-dropdown">
-          <div className='profile-section'>
-          
-          <div className='profile-info'>
-          <p className='profile-username'><strong>{user.name}</strong></p>
-          <p className='profile-email'>{user.email}</p>
-          
-          </div>
-          
-          </div>
-          
-          
-          <div className='edit-profile-section'>
-            <img src={account} alt="account" />
-          <Link to="/editprofile"><strong>Profile</strong></Link>
-          </div>
-          
-          <div className='logout-section'>
-            <img src={logout} alt="logout" />
-          <button className="logout-btn">Logout</button>
-          </div>
-          
-        </div>
-      )}
-      {isSidebarOpen && (
-          <div className="sidebar">
-            <ul className="sidebar-links">
-              <li><i className="fas fa-tachometer-alt"></i> Dashboard</li>
-              <li><i className="fas fa-eye"></i> Watchlist</li>
-              <li><i className="fas fa-briefcase"></i> Portfolio</li>
-            </ul>
-            <div className="market-overview">
-              <h4>Market Overview</h4>
-              <p>NSE <span className="red">25,0625</span></p>
-              <p>BSE <span className="green">25,0545</span></p>
-            </div>
-          </div>
-        )}
-
+     <Header />
       {/* Main Content */}
       <div className="main-content">
         {/* Sidebar - only show if isSidebarOpen is true */}
