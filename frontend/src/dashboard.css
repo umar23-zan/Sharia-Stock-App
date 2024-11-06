@@ -22,8 +22,14 @@
   align-items: center; 
 }
 
-.header-icons .logo {
+.header-icons  {
   margin-left: 10px; 
+}
+
+.logo{
+  margin-left: 10px;
+  width: 250px;
+  height: 100px;
 }
 
 .user-icon {

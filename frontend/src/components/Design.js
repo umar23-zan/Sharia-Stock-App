@@ -6,6 +6,7 @@ import investing from '../images/Halal investing.png';
 import opportunities from '../images/opportunities.png';
 import halalway from '../images/Halal way.png';
 import portfolio from '../images/Portfolio.png';
+import logo from '../images/ShariaStocks-logo/logo.png'
 import { Link } from 'react-router-dom';
 import '../design.css';
 
@@ -13,7 +14,7 @@ export default function Design() {
   return (
     <div className='contents'>
       <div className='header'>
-        <h2 className='header-title'>ShariaStock</h2>
+        <img src={logo} alt="logo" className='header-title'/>
         <div className='header-button'>
           <Link to="/login">
             <button className='login'>LOGIN</button>

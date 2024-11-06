@@ -4,6 +4,7 @@ import '../dashboard.css'; // Import the CSS file
 import { useNavigate, Link } from 'react-router-dom';
 import account from '../images/account-icon.svg';
 import logout from '../images/logout.svg';
+import logo from '../images/ShariaStocks-logo/logo.png'
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false); // For user profile dropdown
@@ -38,7 +39,7 @@ const Header = () => {
         <div className="header-icons">
           {/* List icon to toggle sidebar */}
           <i className="fas fa-list" onClick={toggleSidebar}></i>
-          <div className="logo">ShariaStock</div>
+          <img src={logo} alt="logo" className="logo"/>
         </div>
 
         <div className="user-icon" onClick={toggleDropdown}>

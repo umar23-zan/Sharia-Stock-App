@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signup } from '../api/auth';
 import '../App.css'
+import logo from '../images/ShariaStocks-logo/logo.png'
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ const Signup = () => {
     return (
         <div>
             <div className='header-section'>
-                <h1>ShariaStock</h1>
+                <img src={logo} alt="logo" />
             </div>
             <div className='form-container'>
                 <h1>Sign Up</h1>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
+
 const Dashboard = () => {
   const [searchSymbol, setSearchSymbol] = useState('');
   const [loading, setLoading] = useState(false);
