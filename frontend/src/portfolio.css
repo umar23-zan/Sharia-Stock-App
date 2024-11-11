@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.header-portfolio , .header-watchlist{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+  background-color: #003366;
+  padding: 0 5%;
+  width: 100%;
+}
+
+.stock-portfolio,.stock-watchlist {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.portfolio-topics,.watchlist-topics {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.portfolio-headings,.watchlist-headings {
+  color: white;
+  font-size: 1rem;
+}
+
+.portfolio-headings:hover,
+.watchlist-headings:hover {
+  color: gold;
+  cursor: pointer;
+}
+
+.icon {
+  color: White;
+  font-size: medium;
+  margin-top: 5px;
+}
+
+.icon:hover {
+  color: gold;
+  cursor: pointer;
+}
+
+.portfolio-container, .watchlist-container {
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  width: 100%;
+}
+
+.portfolio-table,
+.watchlist-table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 20px auto; /* Center the table */
+  border: 1px solid #ddd;
+}
+
+.portfolio-table-header,
+.watchlist-header {
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.portfolio-stock-symbol,
+.watchlist-symbol,
+.portfolio-stock-price,
+.watchlist-price,
+.portfolio-stock-change,
+.watchlist-change,
+.portfolio-stock-changepercent,
+.watchlist-change-percent,
+.portfolio-stock-lastupdated,
+.watchlist-last-updated {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center; /* Center text in table cells */
+}
+
+.footer {
+  background-color:#003366;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: auto;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.footer-link {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: gold;
+}

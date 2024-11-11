@@ -26,6 +26,26 @@
   margin-left: 10px; 
 }
 
+.header-button {
+  display: flex;
+  gap: 20px;
+}
+
+.portfolio,
+.watchlist {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #00A86B;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.portfolio:hover,
+.watchlist:hover {
+  background-color: #007a50;
+}
+
 .logo{
   margin-left: 10px;
   width: 250px;
@@ -245,6 +265,35 @@
 .suggestion-item:hover {
   background-color: #f0f0f0;
 }
+
+/* Stock Table */
+.stock-table {
+  width: 70%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto; /* Center the table */
+}
+
+/* Table Headers */
+.stock-header {
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+/* Table Data Cells */
+.stock-symbol,
+.stock-price,
+.stock-change,
+.stock-change-percent,
+.last-updated {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center; /* Center text in table cells */
+}
+
 
 .sidebar {
   

@@ -41,7 +41,14 @@ const Header = () => {
           <i className="fas fa-list" onClick={toggleSidebar}></i>
           <img src={logo} alt="logo" className="logo"/>
         </div>
-
+        <div className="header-button">
+          <button onClick={() => navigate('/portfolio')} className="portfolio">
+            Portfolio
+          </button>
+          <button onClick={() => navigate('/watchlist')} className="watchlist">
+            Watchlist
+          </button>
+        </div>
         <div className="user-icon" onClick={toggleDropdown}>
           <img src={`http://localhost:5000/${user.profilePicture}`} alt="Profile" className="profile-pic" /> {/* Profile Picture */}
           <div className='user-info'>
