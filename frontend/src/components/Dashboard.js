@@ -17,6 +17,7 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
   const [isAddedToPortfolio, setIsAddedToPortfolio] = useState(false);
   const [isAddedToWatchlist, setIsAddedToWatchlist] = useState(false);
 
+
   const navigate = useNavigate(); // Initialize useNavigate
   const email = localStorage.getItem('userEmail');
 
@@ -134,18 +135,17 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     setSearchSymbol(value);
 
     if (value) {
-      try {
-        const response = await axios.get(`http://localhost:5000/search?q=${value}`);
-        setSuggestions(response.data);
-      } catch (error) {
-        console.error('Error fetching suggestions', error);
-      }
+      const filteredCompanies = companies.filter(
+        (company) =>
+          company.name.toUpperCase().includes(value) || company.symbol.includes(value)
+      );
+      setSuggestions(filteredCompanies);
     } else {
       setSuggestions([]);
     }
   };
 
-  const handleSuggestionClick = (symbol, name) => {
+  const handleSuggestionClick = (symbol) => {
     setSearchSymbol(symbol.replace('.NSE', '')); 
     setSuggestions([]);
 
@@ -214,6 +214,10 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     }
   };
 
+  const handleNavigateToStockDetails = (symbol, name) =>{
+    navigate(`/stock/${symbol}`, { state: { name } });
+  }
+
   return (
     <div className="App">
      <Header />
@@ -257,7 +261,7 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr onClick={handleNavigateToStockDetails}>
                 <td className="stock-symbol">{stock.symbol}</td>
                 <td className="stock-price">₹{stock.price}</td>
                 <td className="stock-change">{stock.change}</td>
