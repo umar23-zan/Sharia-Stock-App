@@ -8,7 +8,7 @@ import logo from '../images/ShariaStocks-logo/logo.png'
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false); // For user profile dropdown
-  const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar initially hidden
+  
   const [user, setUser] = useState({});
   const navigate = useNavigate(); 
   
@@ -29,17 +29,17 @@ const Header = () => {
     setDropdownOpen((prev) => !prev);
   };
 
-  const toggleSidebar = () => {
-    setSidebarOpen((prev) => !prev);
+  const handleLogout = () => {
+    // Clear user data from localStorage
+    localStorage.removeItem('userEmail');
+    navigate('/login');
   };
 
   return (
     <div>
       <nav className="navbar">
         <div className="header-icons">
-          {/* List icon to toggle sidebar */}
-          <i className="fas fa-list" onClick={toggleSidebar}></i>
-          <img src={logo} alt="logo" className="logo"/>
+          <img src={logo} alt="logo" className="logo" onClick={() => navigate('/Dashboard')}/>
         </div>
         <div className="header-button">
           <button onClick={() => navigate('/portfolio')} className="portfolio">
@@ -62,16 +62,11 @@ const Header = () => {
       {isDropdownOpen && (
         <div className="profile-dropdown">
           <div className='profile-section'>
-          
           <div className='profile-info'>
           <p className='profile-username'><strong>{user.name}</strong></p>
           <p className='profile-email'>{user.email}</p>
-          
           </div>
-          
           </div>
-          
-          
           <div className='edit-profile-section'>
             <img src={account} alt="account" />
           <Link to="/editprofile"><strong>Profile</strong></Link>
@@ -79,25 +74,11 @@ const Header = () => {
           
           <div className='logout-section'>
             <img src={logout} alt="logout" />
-          <button className="logout-btn">Logout</button>
+          <button className="logout-btn" onClick={handleLogout}>Logout</button>
           </div>
           
         </div>
       )}
-      {isSidebarOpen && (
-          <div className="sidebar">
-            <ul className="sidebar-links">
-              <li><i className="fas fa-tachometer-alt"></i> Dashboard</li>
-              <li><i className="fas fa-eye"></i> Watchlist</li>
-              <li><i className="fas fa-briefcase"></i> Portfolio</li>
-            </ul>
-            <div className="market-overview">
-              <h4>Market Overview</h4>
-              <p>NSE <span className="red">25,0625</span></p>
-              <p>BSE <span className="green">25,0545</span></p>
-            </div>
-          </div>
-        )}
     </div>
   )
 }

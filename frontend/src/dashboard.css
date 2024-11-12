@@ -27,6 +27,10 @@
   margin-left: 10px; 
 }
 
+.logo:hover{
+  cursor: pointer;
+}
+
 .header-button {
   display: flex;
   flex-direction: row;

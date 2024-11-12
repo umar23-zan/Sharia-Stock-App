@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../portfolio.css';
+import Header from './Header';
+import Footer from './Footer';
 
 export default function Watchlist() {
   const [watchlist, setWatchlist] = useState([]);
@@ -44,15 +46,7 @@ export default function Watchlist() {
 
   return (
     <div>
-      <div className="header-watchlist">
-        <h2 className="stock-watchlist">ShariaStock</h2>
-        <div className="watchlist-topics">
-          <p className="watchlist-headings">Bonds</p>
-          <p className="watchlist-headings">Equity</p>
-          <p className="watchlist-headings">F&Q</p>
-          <i className="fa-regular fa-user icon" title="profile"></i>
-        </div>
-      </div>
+      <Header />
 
       <div className="watchlist-container">
         <h3>Watchlist</h3>
@@ -95,16 +89,7 @@ export default function Watchlist() {
         )}
       </div>
 
-      <footer className="footer">
-        <div className="footer-content">
-          <p>2024 ShariaStock. All Rights Reserved.</p>
-          <div className="footer-links">
-            <a href="#" className="footer-link">About Us</a>
-            <a href="#" className="footer-link">Contact</a>
-            <a href="#" className="footer-link">Privacy Policy</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

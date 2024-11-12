@@ -108,6 +108,17 @@ const Login = () => {
               <Link
                 component="button"
                 variant="body2"
+                onClick={() => navigate('/forgot-password')}
+                sx={{ color: '#00A86B' }}
+                disabled={loading}
+              >
+                Forgot Password?
+              </Link>
+            </Box>
+            <Box sx={{ textAlign: 'center', mt: 0 }}>
+              <Link
+                component="button"
+                variant="body2"
                 onClick={() => navigate('/signup')}
                 sx={{ color: '#00A86B' }}
                 disabled={loading}

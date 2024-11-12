@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../portfolio.css';
+import Header from './Header';
+import Footer from './Footer';
 
 export default function Portfolio() {
   const [portfolio, setPortfolio] = useState([]);
@@ -44,20 +46,7 @@ export default function Portfolio() {
 
   return (
     <div>
-      <div className="header-portfolio">
-        <h2 className="stock-portfolio">ShariaStock</h2>
-        <div className="portfolio-topics">
-          <p className="portfolio-headings">Bonds</p>
-          <p className="portfolio-headings">Equity</p>
-          <p className="portfolio-headings">F&Q</p>
-
-          <i className="fa-regular fa-user icon" title="profile"></i>
-        </div>
-      </div>
-      
-      
-
-
+      <Header />
       <div className='portfolio-container'>
       <h3>Portfolio</h3>
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -98,16 +87,7 @@ export default function Portfolio() {
         <p>No stocks in portfolio</p>
       )}</div>
 
-<footer className="footer">
-        <div className="footer-content">
-          <p>2024 ShariaStock. All Rights Reserved.</p>
-          <div className="footer-links">
-            <a href="#" className="footer-link">About Us</a>
-            <a href="#" className="footer-link">Contact</a>
-            <a href="#" className="footer-link">Privacy Policy</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
