@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect }  from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import signup from '../images/Signup.png';
@@ -7,10 +7,17 @@ import opportunities from '../images/opportunities.png';
 import halalway from '../images/Halal way.png';
 import portfolio from '../images/Portfolio.png';
 import logo from '../images/ShariaStocks-logo/logo.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../design.css';
 
 export default function Design() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem('userEmail')) {
+      // Redirect to dashboard if already logged in
+      navigate('/Dashboard');
+    }
+  }, [navigate]);
   return (
     <div className='contents'>
       <div className='header'>

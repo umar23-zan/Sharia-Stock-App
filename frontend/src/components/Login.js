@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';  
 import logo from '../images/ShariaStocks-logo/logo.png'
@@ -21,6 +21,13 @@ const Login = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+      if (localStorage.getItem('userEmail')) {
+        // Redirect to dashboard if already logged in
+        navigate('/Dashboard');
+      }
+    }, [navigate]);
 
     const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 

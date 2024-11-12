@@ -32,7 +32,7 @@ const Header = () => {
   const handleLogout = () => {
     // Clear user data from localStorage
     localStorage.removeItem('userEmail');
-    navigate('/login');
+    navigate('/');
   };
 
   return (
