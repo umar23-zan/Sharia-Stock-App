@@ -93,10 +93,11 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     }
   }, [email]);
 
-  const fetchStockData = async (symbol) => {
+  const fetchStockData = async (symbol,name) => {
     setLoading(true);
     setError(null);
     try {
+      
       const API_KEY = '670cbdcb5d6a98.28595369';
       const response = await axios.get(
         `https://eodhistoricaldata.com/api/real-time/${symbol}.NSE?api_token=${API_KEY}&fmt=json`
@@ -126,6 +127,7 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
        fetchStockData(searchSymbol.trim().toUpperCase());
       setIsAddedToPortfolio(false);
       setIsAddedToWatchlist(false);
+      
       //navigate(`/stock/${searchSymbol.trim().toUpperCase()}`); // Navigate to stock detail page
     }
   };
@@ -145,10 +147,10 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     }
   };
 
-  const handleSuggestionClick = (symbol) => {
+  const handleSuggestionClick = (symbol,name) => {
     setSearchSymbol(symbol.replace('.NSE', '')); 
     setSuggestions([]);
-
+    console.log(symbol, name)
     //navigate(`/stock/${symbol}`, { state: { name } }); // Navigate to stock detail page
   };
 
@@ -214,7 +216,9 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     }
   };
 
-  const handleNavigateToStockDetails = (symbol, name) =>{
+  const handleNavigateToStockDetails = (symbol,name) =>{
+    console.log(companies.name)
+    console.log(symbol)
     navigate(`/stock/${symbol}`, { state: { name } });
   }
 
@@ -261,7 +265,7 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
               </tr>
             </thead>
             <tbody>
-              <tr onClick={handleNavigateToStockDetails}>
+              <tr onClick={() => handleNavigateToStockDetails(stock.symbol, stock.name)}>
                 <td className="stock-symbol">{stock.symbol}</td>
                 <td className="stock-price">₹{stock.price}</td>
                 <td className="stock-change">{stock.change}</td>

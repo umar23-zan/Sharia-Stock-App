@@ -24,7 +24,7 @@ const StockDetail=() => {
   const fetchStockData = async () => {
     
     try {
-      const response = await axios.get(`https://eodhistoricaldata.com/api/real-time/${symbol}?api_token=670cbdcb5d6a98.28595369&fmt=json`);
+      const response = await axios.get(`https://eodhistoricaldata.com/api/real-time/${symbol}.NSE?api_token=670cbdcb5d6a98.28595369&fmt=json`);
       const stockInfoData = response.data;
 
       setStockData({
@@ -46,11 +46,8 @@ const StockDetail=() => {
   };
 
   const fetchHistoricalData = async () => {
-    
-    
-
     try {
-      const response = await axios.get(`https://eodhistoricaldata.com/api/eod/${symbol}?api_token=670cbdcb5d6a98.28595369 &fmt=json`);
+      const response = await axios.get(`https://eodhistoricaldata.com/api/eod/${symbol}.NSE?api_token=670cbdcb5d6a98.28595369 &fmt=json`);
       const data = response.data;
       setHistoricalData(data);
       filterDataByRange(selectedRange, data);
