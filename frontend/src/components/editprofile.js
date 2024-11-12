@@ -3,6 +3,7 @@ import { getUserData, updateUserData, uploadProfilePicture } from '../api/auth';
 import { Link } from 'react-router-dom';
 import '../editprofile.css';
 import Header from './Header';
+import account from '../images/account-icon.svg';
 
 const EditProfile = () => {
     const [user, setUser] = useState({});
@@ -36,7 +37,7 @@ const EditProfile = () => {
                     pincode: userData.pincode || ''
                 });
                 setProfilePicture(userData.profilePicture || '');
-                setProfilePreview(`http://localhost:5000/${userData.profilePicture}`);
+                setProfilePreview(userData.profilePicture ? `http://localhost:5000/${userData.profilePicture}` : account);
             }
         };
         fetchUserData();
@@ -48,7 +49,7 @@ const EditProfile = () => {
 
     const handleCancelClick = () => {
         setIsEditing(false);
-        setProfilePreview(`http://localhost:5000/${user.profilePicture}`);
+        setProfilePreview(user.profilePicture ? `http://localhost:5000/${user.profilePicture}` : account);
     };
 
     const handleChange = (e) => {
@@ -77,7 +78,7 @@ const EditProfile = () => {
         setIsEditing(false);
         const updatedUserData = await getUserData(email);
         setUser(updatedUserData);
-        setProfilePreview(`http://localhost:5000/${updatedUserData.profilePicture}`);
+        setProfilePreview(updatedUserData.profilePicture ? `http://localhost:5000/${updatedUserData.profilePicture}` : account);
     };
 
     return (
@@ -109,12 +110,13 @@ const EditProfile = () => {
                             </div>
                             <div className="form-field">
                                 <label><strong>Contact Number</strong></label>
-                                <p>{user.contactNumber}</p>
+                                <p>{user.contactNumber || 'Add Contact Number'}</p>
                             </div>
                             <div className="form-field">
                                 <label><strong>Address</strong></label>
-                                <p>{`${user.doorNumber}, ${user.streetName}, ${user.city}, ${user.country} - ${user.pincode}`}</p>
+                                <p>{`${user.doorNumber || ''}${user.streetName || ''}${user.city || 'Add Address'}${user.country || ''} ${user.pincode || ''}`}</p>
                             </div>
+
                         </div>
                         
                     </div>
