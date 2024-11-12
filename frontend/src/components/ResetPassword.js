@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { resetPassword } from '../api/auth'; 
+import logo from '../images/ShariaStocks-logo/logo.png'
 import '../App.css'
 
 const ResetPassword = () => {
@@ -44,7 +45,7 @@ const ResetPassword = () => {
     return (
         <div>
             <div className='header-section'>
-                <h1>ShariaStock</h1>
+                <img src={logo} alt="logo" />
             </div>
             <div className='form-container'>
                 <h2>Reset Password</h2>

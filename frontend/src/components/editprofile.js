@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUserData, updateUserData, uploadProfilePicture } from '../api/auth';
-import { Link } from 'react-router-dom';
+
 import '../editprofile.css';
 import Header from './Header';
 import account from '../images/account-icon.svg';
