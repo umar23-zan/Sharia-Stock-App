@@ -78,7 +78,9 @@ export default function Design() {
   return (
     <div>
       <div className='header'>
-      <img src={logo} alt="logo" className='header-title'/>
+      <div className="header-icons">
+          <img src={logo} alt="logo" className="logo"/>
+        </div>
         <div className='header-button'>
           <button className='login' onClick={handleLoginClick}>LOGIN</button>
           <button className='signup' onClick={handleSignupClick}>SIGNUP</button>

@@ -116,7 +116,13 @@ const Login = () => {
                 component="button"
                 variant="body2"
                 onClick={() => navigate('/forgot-password')}
-                sx={{ color: '#00A86B' }}
+                sx={{
+                  color: '#00A86B',
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                    color: '#002d62',
+                  },
+                }}
                 disabled={loading}
               >
                 Forgot Password?
@@ -127,7 +133,13 @@ const Login = () => {
                 component="button"
                 variant="body2"
                 onClick={() => navigate('/signup')}
-                sx={{ color: '#00A86B' }}
+                sx={{
+                  color: '#00A86B',
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                    color: '#002d62',
+                  },
+                }}
                 disabled={loading}
               >
                 Don't have an account? Sign Up

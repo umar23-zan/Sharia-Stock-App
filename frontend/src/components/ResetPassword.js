@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { resetPassword } from '../api/auth'; 
 import logo from '../images/ShariaStocks-logo/logo.png'
-import '../App.css'
+import '../auth.css'
 import {
     Container,
     Paper,

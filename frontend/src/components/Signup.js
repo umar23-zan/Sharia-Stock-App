@@ -163,7 +163,13 @@ const Signup = () => {
                 component="button"
                 variant="body2"
                 onClick={() => navigate('/login')}
-                sx={{ color: '#00A86B' }}
+                sx={{
+                  color: '#00A86B',
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                    color: '#002d62',
+                  },
+                }}
                 disabled={loading}
               >
                 Already have an account? Login
