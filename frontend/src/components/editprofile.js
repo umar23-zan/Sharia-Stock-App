@@ -123,8 +123,24 @@ const EditProfile = () => {
                 ) : (
                     <form className="profile-edit-form" onSubmit={handleSubmit}>
                         <div className="profile-picture-section">
+                            <div className='profile-preview'>
                             {profilePreview && <img src={profilePreview} alt="Profile Preview" width={100} height={100} />}
-                            <input className='image-upload' type="file" onChange={handleFileChange} />
+                            </div>
+                            
+                            <div className='profile-change'>
+                            <input 
+                                    id="profilePicture" 
+                                    type="file" 
+                                    onChange={handleFileChange} 
+                                    style={{ display: 'none' }} 
+                                />
+                                
+                                {/* Styled label to act as button */}
+                                <label htmlFor="profilePicture" className="image-upload-button">
+                                    Change Image
+                                </label>
+                            </div>
+                             
                         </div>
                         
                         <div className="form-fields">

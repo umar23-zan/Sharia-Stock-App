@@ -22,14 +22,7 @@
   background-color: #f9f9f9;
 }
 
-.profile-picture-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  
- 
- 
-}
+
 
 .edit-btn, .form-actions button {
   padding: 10px 15px;
@@ -46,10 +39,32 @@
   margin-left: 400px;
 }
 
-.image-upload{
-  align-self: center;
-  margin-left: 150px;
+.profile-picture-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
+
+
+.image-upload-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #00A86B;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.image-upload-button:hover {
+  background-color: #008f5a;
+}
+
 
 .form-fields {
   display: flex;

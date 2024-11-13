@@ -23,7 +23,7 @@ const Signup = () => {
         confirmPassword: '',
     });
     const { name, email, password, confirmPassword } = formData;
-    //const [alert, setAlert] = useState(null); // For showing alerts
+    const [alert, setAlert] = useState(null); // For showing alerts
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Signup = () => {
         setLoading(true);
         try {
             const res = await signup(formData);
-            //setAlert({ type: 'success', message: 'Signup successful!' });
+            setAlert({ type: 'success', message: 'Signup successful!' });
             console.log(res);
              // Clear any existing errors
             setError('');
@@ -55,6 +55,11 @@ const Signup = () => {
               password: '',
               confirmPassword: '',
           });
+
+          setTimeout(() => {
+            setAlert(null); // Hide the alert
+            navigate('/login');
+          }, 1500);
             
         } catch (err) {
           console.error('Signup error:', err.response?.data || err.message);
@@ -88,6 +93,11 @@ const Signup = () => {
               {error}
             </Alert>
           )}
+          {alert && (
+              <Alert severity={alert.type} sx={{ mb: 2 }}>
+                {alert.message}
+              </Alert>
+            )}
 
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
             <TextField
