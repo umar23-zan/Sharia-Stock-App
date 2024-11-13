@@ -205,11 +205,10 @@
 .stock-container {
   display: flex;
   flex-direction: column;
-
-      padding: 20px;
-      text-align: center;
-      align-items: center;
-      background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+  background-color: #f9f9f9;
 }
 
 .stock-search-title {
