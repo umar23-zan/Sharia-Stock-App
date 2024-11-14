@@ -1,5 +1,3 @@
-/* General responsive styles */
-
 
 .stock-detail-container{
   width: 100%;
@@ -9,92 +7,14 @@
   box-sizing: border-box;
   font-family: "Noto Sans", sans-serif;
 }
-
-
-
-
-
-
-/* Stock Search Title */
-.stock-container {
-  display: flex;
-  flex-direction: column;
-
-      padding: 20px;
-      text-align: center;
-      align-items: center;
-      background-color: #f9f9f9;
-}
-
-.stock-search-title {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 2rem;
-  color: #003366;
-}
-
-/* Search Form */
-.search-form {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.search-input {
-  padding: 10px;
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-/* Search Button */
-.search-button {
-  padding: 10px 20px;
-  background-color: #00A86B;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-/* Button Hover Effect */
-.search-button:hover {
-  background-color: #007a50;
-}
-
-/* Suggestions List */
-.suggestions {
-  list-style: none;
-  padding: 0;
-  
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: white;
-  position: relative;
-  z-index: 1000;
-  width: 400px;
-}
-
-/* Suggestion Item */
-.suggestion-item {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.suggestion-item:hover {
-  background-color: #f0f0f0;
-}
-
 /* Stock Table */
 .stock-grid {
   display: grid;
+  text-align: center;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  width: 90%;
-  
+  width: 85%;
+  margin-left: 10px;
   background-color: white;
   padding: 24px;
   
@@ -137,106 +57,18 @@
   }
 }
 
-/* Table Headers */
-.stock-header {
-  background-color: #f4f4f4;
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-/* Table Data Cells */
-.stock-symbol,
-.stock-price,
-.stock-change,
-.stock-change-percent,
-.last-updated {
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: row;
-    height: auto;
-    padding: 20px;
-  }
-
-  .header-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-  }
-
-  .header-button {
-    gap: 10px;
-  }
-
-  .login,
-  .signup {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-
-  .carousel-container {
-    width: 90%;
-  }
-
-  .search-input {
-    width: 80%;
-  }
-
-  .search-form {
-    flex-direction: column;
-  }
-
-  .search-button {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .suggestions {
-    width: 80%;
-  }
-
-}
-
-@media (max-width: 480px) {
-  .header-title {
-    font-size: 1.1rem;
-  }
-
-  .login,
-  .signup {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-  }
-
-  .stock-search-title {
-    font-size: 1.5rem;
-  }
-
-  .search-input {
-    padding: 8px;
-  }
-
-  .search-button {
-    padding: 8px 16px;
-  }
-}
 
 
 
 /*Chart Component styles*/
 .market-container1{
   margin-top: 10px;
-  width: 100%;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: left;
-  padding: 10px;
+  
   background-color: #f9f9f9;
 }
 
@@ -272,6 +104,60 @@
 
 .range-buttons1 button:hover{
   color: #00A86B;
+}
+
+.chart{
+  width: 700px;
+  height: 350px;
+}
+
+@media (max-width: 1024px) {
+  .chart-components1{
+    margin-left: 100px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #333333;
+    padding-top: 5px;
+    width: 500px;
+  }
+  .chart{
+    width: 500px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 640px) {
+  .chart-components1{
+    margin-left: 65px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #333333;
+    padding-top: 5px;
+    width: 400px;
+  }
+  .chart{
+    width: 400px;
+    height: 200px;
+  }
+  .range-buttons1{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding-left: 35px;
+    margin-bottom: 10px;
+  }
+  
+  .range-buttons1 button{
+    background-color: transparent;
+    border-style: solid;
+    border-bottom: none;
+    border-color: black;
+    border-top: none;
+    border-left: none;
+    color: #003366;
+    font-weight:medium;
+    
+  }
 }
 
 

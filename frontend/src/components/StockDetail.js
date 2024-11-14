@@ -191,7 +191,7 @@ const StockDetail=() => {
                 </button>
               ))}
             </div>
-            <div style={{ width: '700px', height: '300px' }}>
+            <div className='chart' >
             {niftyData ? (
               <Line data={niftyData} options={{
                 scales: {
