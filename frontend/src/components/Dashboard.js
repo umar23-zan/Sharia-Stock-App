@@ -145,7 +145,7 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     }
   }, [email]);
 
-  const fetchStockData = async (symbol,name) => {
+  const fetchStockData = async (symbol) => {
     setLoading(true);
     setError(null);
     try {
@@ -203,7 +203,7 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     setSearchSymbol(symbol.replace('.NSE', '')); 
     setSuggestions([]);
     console.log(symbol, name)
-    // navigate(`/stock/${symbol}`, { state: { name,logos } }); // Navigate to stock detail page
+   
   };
 
   const handleAddToPortfolio = async () => {
@@ -268,11 +268,22 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     }
   };
 
-  const handleNavigateToStockDetails = (symbol,name) =>{
-    console.log(companies.name)
-    console.log(symbol)
-    navigate(`/stock/${symbol}`, { state: { name } });
-  }
+  // const handleNavigateToStockDetails = (symbol,name) =>{
+  //   console.log(name)
+  //   console.log(symbol)
+  //   navigate(`/stock/${symbol}`, { state: { name } });
+  // }
+
+  const handleNavigateToStockDetails = (symbol) => {
+    const company = companies.find((c) => c.symbol === `${symbol}.NSE`);
+    if (company) {
+      console.log("Navigating to:", company.name, company.symbol);
+      navigate(`/stock/${symbol}`, { state: { name: company.name } });
+    } else {
+      console.error(`Company with symbol ${symbol} not found in companies array.`);
+    }
+  };
+  
 
   return (
     <div className="App">

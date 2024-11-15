@@ -99,7 +99,7 @@ export default function Design() {
           showStatus={false}
         >
           <div>
-            <img src={signup} alt="Sign Up" />
+            <img src={signup} alt="Sign Up"  />
           </div>
           <div>
             <img src={investing} alt="Investing" />
