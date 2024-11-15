@@ -9,7 +9,7 @@ body {
 
 .header {
   display: flex;
-  
+  justify-content: space-between;
   align-items: center;
   height: 100px;
   background-color: #003366;
@@ -39,6 +39,8 @@ body {
   display: flex;
   flex-grow: 1;
   gap: 20px;
+  justify-content: flex-end;
+  
 }
 
 .login,
@@ -81,6 +83,7 @@ body {
 .stocks-section {
   display: flex;
   gap: 20px;
+  /* flex-wrap: wrap; */
 }
 
 .stocks-category {
@@ -88,6 +91,7 @@ body {
   background: #f8f8f8;
   padding: 15px;
   border-radius: 8px;
+  min-width: 280px;
 }
 
 .stocks-category h3 {
@@ -119,21 +123,14 @@ body {
   border-radius: 50%;
 }
 
-.stock-price {
+.stock-price1 {
   flex: 1;
   text-align: right;
+  border: none;
 }
 
-.stock-price p {
+.stock-price1 p {
   margin: 0;
-}
-
-.stock-price .positive {
-  color: green;
-}
-
-.stock-price .negative {
-  color: red;
 }
 
 .stock-compliance {
@@ -149,10 +146,10 @@ body {
   color: #4CAF50;
 }
 
-.compliance-rating {
+/* .compliance-rating {
   color: #f4c542;
   font-size: 14px;
-}
+} */
 
 .upgrade-lock {
   text-align: center;
@@ -176,33 +173,37 @@ body {
 .heading-name, .stock-name {
   flex: 2;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
-.heading-price, .stock-price {
-  flex: 1;
-  text-align: right;
-}
 
-.heading-compliance, .stock-compliance {
+
+.heading-price, .stock-price1 {
   flex: 1;
   text-align: center;
 }
 
+.heading-compliance, .stock-compliance {
+  flex: 1;
+  text-align: right;
+}
 
 
 
+@media (max-width:971px){
+
+  .stocks-section{
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 @media (max-width: 768px) {
+
   .header {
     flex-direction: row;
     height: auto;
     padding: 20px;
-  }
-
-  .header-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
   }
 
   .header-button {
@@ -219,11 +220,43 @@ body {
     width: 90%;
   }
 }
+
+@media (max-width:570px){
+  .trending-stocks h2{
+    font-size: large;
+  }
+
+  .stocks-category h3{
+    font-size: medium;
+  }
+
+  .heading-name, .heading-price, .heading-compliance{
+    font-size: 15px;
+  }
+
+  .stock-name strong{
+    font-size: small;
+  }
+
+  .stock-name p{
+    font-size: small;
+    margin-left: 0;
+  }
+
+  .stock-price1 p{
+    font-size: small;
+    margin-left: -10px;
+  } 
+
+  .stock-logo {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+}
   
 @media (max-width: 480px) {
-  .header-title {
-    font-size: 1.1rem;
-  }
 
   .login,
   .signup {
@@ -231,5 +264,28 @@ body {
     font-size: 0.8rem;
   }
 
-  
+  .header-icons img{
+    width: 200px;
+    height: 80px;
+    margin-left: -20px;
+  }
+}
+
+@media (max-width:419px){
+  .login,
+  .signup{
+    font-size:0.6rem;
+    padding: 3px 6px;
+    font-weight: 500;
+  }
+  .header-button{
+    margin-left: 10px;
+  }
+}
+
+@media (max-width:375px){
+  .header-icons img{
+    width: 175px;
+    height: 80px;
+}
 }

@@ -41,7 +41,7 @@ const Header = () => {
         <div className="header-icons">
           <img src={logo} alt="logo" className="logo" onClick={() => navigate('/Dashboard')}/>
         </div>
-        <div className="header-button">
+        <div className="header-button1">
           <button onClick={() => navigate('/portfolio')} className="portfolio">
             Portfolio
           </button>
@@ -71,7 +71,21 @@ const Header = () => {
             <img src={account} alt="account" />
           <Link to="/editprofile"><strong>Profile</strong></Link>
           </div>
+          <div className="header-button2" >
+         <div className='portfolio-dropdown'>
+         <i className="fa-solid fa-check" ></i>
+         <strong onClick={() => navigate('/portfolio')} className="portfolio1">
+            Portfolio
+          </strong>
+         </div>
+         <div className='portfolio-dropdown'>
+          <i className="fa-solid fa-star"></i>
+         <strong onClick={() => navigate('/watchlist')} className="watchlist1">
+            Watchlist
+          </strong>
+         </div>
           
+        </div>
           <div className='logout-section'>
             <img src={logout} alt="logout" />
           <button className="logout-btn" onClick={handleLogout}>Logout</button>

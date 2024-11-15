@@ -3,6 +3,9 @@
   background-color: #002d62;
   padding: 10px 20px;
   color: white;
+  display: flex;
+/* justify-content: center; */
+align-items: center;
 }
 
 .header-section img{
@@ -16,6 +19,7 @@
 .auth-container {
   max-width: 400px;
   margin: 50px auto;
+  /* margin:0 auto; */
   padding: 20px;
   background: white;
   border-radius: 8px;
@@ -77,4 +81,14 @@
 p {
   text-align: center;
   margin-top: 15px;
+}
+
+/* media query */
+
+@media (max-width:470px){
+
+.header-section img{
+  width: 200px;
+  height: 80px;
+}
 }
