@@ -49,7 +49,7 @@ const EditProfile = () => {
 
     const handleCancelClick = () => {
         setIsEditing(false);
-        setProfilePreview(user.profilePicture ? `http://localhost:5000/${user.profilePicture}` : account);
+        setProfilePreview(user.profilePicture ? `${user.profilePicture}` : account);
     };
 
     const handleChange = (e) => {
