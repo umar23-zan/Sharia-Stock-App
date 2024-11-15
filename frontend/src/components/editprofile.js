@@ -37,7 +37,7 @@ const EditProfile = () => {
                     pincode: userData.pincode || ''
                 });
                 setProfilePicture(userData.profilePicture || '');
-                setProfilePreview(userData.profilePicture ? `http://localhost:5000/${userData.profilePicture}` : account);
+                setProfilePreview(userData.profilePicture ? `${userData.profilePicture}` : account);
             }
         };
         fetchUserData();
@@ -78,7 +78,7 @@ const EditProfile = () => {
         setIsEditing(false);
         const updatedUserData = await getUserData(email);
         setUser(updatedUserData);
-        setProfilePreview(updatedUserData.profilePicture ? `http://localhost:5000/${updatedUserData.profilePicture}` : account);
+        setProfilePreview(updatedUserData.profilePicture ? `${updatedUserData.profilePicture}` : account);
     };
 
     return (
