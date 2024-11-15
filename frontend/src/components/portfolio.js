@@ -14,7 +14,7 @@ export default function Portfolio() {
     const fetchPortfolio = async () => {
       if (!email) return;
       try {
-        const response = await axios.get('http://localhost:5000/api/portfolio', {
+        const response = await axios.get('api/portfolio', {
           params: { userId: email }
         });
         setPortfolio(response.data);
@@ -32,7 +32,7 @@ export default function Portfolio() {
     }
     
     try {
-      await axios.delete(`http://localhost:5000/api/portfolio/${symbol}`, {
+      await axios.delete(`api/portfolio/${symbol}`, {
         params: { userId: email }
       });
       
