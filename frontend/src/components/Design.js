@@ -1,6 +1,6 @@
-import React, { useEffect }   from 'react';
+import React, { useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import signup from '../images/Signup.png';
 import investing from '../images/Halal investing.png';
@@ -36,50 +36,48 @@ export default function Design() {
 
   const stocks = {
     mostActive: [
-      { name: 'Infosys Ltd', symbol: 'INFY', price: '$145.26', compliance: 4, logo: `${infosys}` },
-      { name: 'Bajaj Finance Ltd', symbol: 'BAJFINANCE', price: '$1.04', compliance: 3, logo: `${bajaj}` },
-      { name: 'State Bank of India', symbol: 'SBIN', price: '$350.00',  compliance: 4, logo: `${sbi}` }
+      { name: 'Infosys Ltd', symbol: 'INFY', price: '$145.26', isHalal: true, logo: `${infosys}` },
+      { name: 'Bajaj Finance Ltd', symbol: 'BAJFINANCE', price: '$1.04', isHalal: true, logo: `${bajaj}` },
+      { name: 'State Bank of India', symbol: 'SBIN', price: '$350.00', isHalal: false, logo: `${sbi}` }
     ],
     mostPopular: [
-      { name: 'HCL Technologies Ltd', symbol: 'HCLTECH', price: '$224.23', compliance: 1, logo: `${hcl}` },
-      { name: 'Axis Bank Ltd', symbol: 'AXISBANK', price: '$145.26', compliance: 3, logo: `${axis}` },
-      { name: 'Asian Paints Ltd', symbol: 'ASIANPAINT', price: '$350.00',  compliance: 3, logo: `${asian}` }
+      { name: 'HCL Technologies Ltd', symbol: 'HCLTECH', price: '$224.23', isHalal: true, logo: `${hcl}` },
+      { name: 'Axis Bank Ltd', symbol: 'AXISBANK', price: '$145.26', isHalal: false, logo: `${axis}` },
+      { name: 'Asian Paints Ltd', symbol: 'ASIANPAINT', price: '$350.00', isHalal: true, logo: `${asian}` }
     ]
   };
 
+ const renderComplianceBadge = (isHalal) => {
+  const badgeClass = isHalal ? 'compliance-badge-halal' : 'compliance-badge-non-halal';
+  return <span className={`compliance-badge ${badgeClass}`}>{isHalal ? 'Halal' : 'Non-Halal'}</span>;
+}
 
-    const renderCompliance = (rating) => {
-      const stars = Array(5).fill('☆').fill('★', 0, rating);
-      return <span className="compliance-rating">{stars.join('')}</span>;
-    };
 
-    const renderStockRow = (stock) => (
-      <div className="stock-row" key={stock.symbol}>
-        <div className="stock-name">
-          <img src={stock.logo} alt={`${stock.name} logo`} className="stock-logo" />
-          <div>
+
+  const renderStockRow = (stock) => (
+    <div className="stock-row" key={stock.symbol}>
+      <div className="stock-name">
+        <img src={stock.logo} alt={`${stock.name} logo`} className="stock-logo" />
+        <div>
           <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
             <strong>{stock.name}</strong>
           </Link>
-            <p>{stock.symbol}</p>
-          </div>
-        </div>
-        <div className="stock-price">
-          <p>{stock.price}</p>
-        </div>
-        <div className="stock-compliance">
-          <span className="compliance-badge">Halal</span>
-          {renderCompliance(stock.compliance)}
         </div>
       </div>
-    );
-  
+      <div className="stock-price1">
+        <p>{stock.price}</p>
+      </div>
+      <div className="stock-compliance">
+        {renderComplianceBadge(stock.isHalal)}
+      </div>
+    </div>
+  );
 
   return (
     <div>
       <div className='header'>
-      <div className="header-icons">
-          <img src={logo} alt="logo" className="logo"/>
+        <div className="header-icons">
+          <img src={logo} alt="logo" className="logo" />
         </div>
         <div className='header-button'>
           <button className='login' onClick={handleLoginClick}>LOGIN</button>
@@ -98,9 +96,13 @@ export default function Design() {
           transitionTime={1000}
           showStatus={false}
         >
-          <div>
-            <img src={signup} alt="Sign Up"  />
-          </div>
+          
+            <Link to="/signup">
+            <div>
+             <img src={signup} alt="Sign Up" />
+            </div>
+            </Link>
+          
           <div>
             <img src={investing} alt="Investing" />
           </div>
@@ -117,43 +119,42 @@ export default function Design() {
       </div>
 
       <div className="trending-stocks">
-      <h2>Trending Halal Stocks</h2>
-      <div className="stocks-section">
-        <div className="stocks-category">
-          <h3>Most Active</h3>  
+        <h2>Trending Halal Stocks</h2>
+        <div className="stocks-section">
+          <div className="stocks-category">
+            <h3>Most Active</h3>
 
-          <div className="table-headings">
-            <span className="heading-name">Name</span>
-            <span className="heading-price">Price</span>
-            <span className="heading-compliance">Compliance</span>
-          </div>  
+            <div className="table-headings">
+              <span className="heading-name">Name</span>
+              <span className="heading-price">Price</span>
+              <span className="heading-compliance">Compliance</span>
+            </div>
 
-          <div className="stocks-list">
-            {stocks.mostActive.map(renderStockRow)}
-            <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="upgrade-lock">🔒 Sign-up or Upgrade to Unlock!</div>
-            </Link>
+            <div className="stocks-list">
+              {stocks.mostActive.map(renderStockRow)}
+              <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div className="upgrade-lock">🔒 Sign-up or Upgrade to Unlock!</div>
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="stocks-category">
-          <h3>Most Popular</h3>
+          <div className="stocks-category">
+            <h3>Most Popular</h3>
 
-          <div className="table-headings">
-            <span className="heading-name">Name</span>
-            <span className="heading-price">Price</span>
-            <span className="heading-compliance">Compliance</span>
-          </div>
+            <div className="table-headings">
+              <span className="heading-name">Name</span>
+              <span className="heading-price">Price</span>
+              <span className="heading-compliance">Compliance</span>
+            </div>
 
-          <div className="stocks-list">
-            {stocks.mostPopular.map(renderStockRow)}
-            <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="upgrade-lock">🔒 Sign-up or Upgrade to Unlock!</div>
-            </Link>
+            <div className="stocks-list">
+              {stocks.mostPopular.map(renderStockRow)}
+              <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div className="upgrade-lock">🔒 Sign-up or Upgrade to Unlock!</div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
     </div>
   );
 }
