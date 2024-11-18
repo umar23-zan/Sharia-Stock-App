@@ -278,7 +278,7 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     const company = companies.find((c) => c.symbol === `${symbol}.NSE`);
     if (company) {
       console.log("Navigating to:", company.name, company.symbol);
-      navigate(`/stock/${symbol}`, { state: { name: company.name } });
+      navigate(`/stock/${symbol}`, { state: { name: company.name , logo : company.logos } });
     } else {
       console.error(`Company with symbol ${symbol} not found in companies array.`);
     }

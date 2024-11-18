@@ -36,14 +36,14 @@ export default function Design() {
 
   const stocks = {
     mostActive: [
-      { name: 'Infosys Ltd', symbol: 'INFY', price: '$145.26', isHalal: true, logo: `${infosys}` },
-      { name: 'Bajaj Finance Ltd', symbol: 'BAJFINANCE', price: '$1.04', isHalal: true, logo: `${bajaj}` },
-      { name: 'State Bank of India', symbol: 'SBIN', price: '$350.00', isHalal: false, logo: `${sbi}` }
+      { name: 'Infosys Ltd', symbol: 'INFY', price: '₹ 145.26', isHalal: true, logo: `${infosys}` },
+      { name: 'Bajaj Finance Ltd', symbol: 'BAJFINANCE', price: '₹ 1.04', isHalal: true, logo: `${bajaj}` },
+      { name: 'State Bank of India', symbol: 'SBIN', price: '₹ 350.00', isHalal: false, logo: `${sbi}` }
     ],
     mostPopular: [
-      { name: 'HCL Technologies Ltd', symbol: 'HCLTECH', price: '$224.23', isHalal: true, logo: `${hcl}` },
-      { name: 'Axis Bank Ltd', symbol: 'AXISBANK', price: '$145.26', isHalal: false, logo: `${axis}` },
-      { name: 'Asian Paints Ltd', symbol: 'ASIANPAINT', price: '$350.00', isHalal: true, logo: `${asian}` }
+      { name: 'HCL Technologies Ltd', symbol: 'HCLTECH', price: '₹ 224.23', isHalal: true, logo: `${hcl}` },
+      { name: 'Axis Bank Ltd', symbol: 'AXISBANK', price: '₹ 145.26', isHalal: false, logo: `${axis}` },
+      { name: 'Asian Paints Ltd', symbol: 'ASIANPAINT', price: '₹ 350.00', isHalal: true, logo: `${asian}` }
     ]
   };
 

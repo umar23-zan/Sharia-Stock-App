@@ -12,7 +12,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const StockDetail=() => {
   const { symbol } = useParams();
   const location = useLocation();
-  const { name } = location.state || {};
+  const { name, logo } = location.state || {};
   const [stockData, setStockData] = useState(null);
   const [historicalData, setHistoricalData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -133,7 +133,8 @@ const StockDetail=() => {
       <br />
       {stockData && (
         <>
-          <h1>{stockData.symbol} Details</h1>
+          <h1> {logo && <img src={logo} alt={`${name} logo`} style={{ width: '50px',height:'50px',borderRadius:'50%', marginRight: '10px', marginTop:'15px' }} />}
+            {stockData.symbol} Details</h1>
           <div className="stock-grid">
             <div className="stock-item">
               <div className="label">Open</div>
