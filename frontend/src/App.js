@@ -6,12 +6,9 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Design from './components/Design'
 import Dashboard from './components/Dashboard';
-
 import Portfolio from './components/portfolio';
 import Watchlist from './components/watchlist';
 import './portfolio.css'
-
-
 import EditProfile from './components/editprofile';
 import Settings from './components/Settings';
 import  StockDetail  from './components/StockDetail';
@@ -19,6 +16,7 @@ import AboutUs from './components/AboutUs';
 import Legal from './components/Legal';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ContactUs from './components/ContactUs';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
 
@@ -44,12 +42,56 @@ const App = () => {
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/reset-password/:token" element={<ResetPassword />} />
-                    <Route path="/Dashboard" element={<Dashboard addToPortfolio={addToPortfolio} addToWatchlist={addToWatchlist} userId={userId} />} />
-                    <Route path='/portfolio' element={<Portfolio portfolio={portfolio} userId={userId}/>}/>
-                    <Route path='/watchlist' element={<Watchlist  watchlist={watchlist} userid={userId}/>}/>
+                    {/* Protected Routes */}
+                <Route
+                    path="/dashboard"
+                    element={
+                        <PrivateRoute>
+                            <Dashboard addToPortfolio={addToPortfolio} addToWatchlist={addToWatchlist} userId={userId} />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/portfolio"
+                    element={
+                        <PrivateRoute>
+                            <Portfolio portfolio={portfolio} userId={userId} />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/watchlist"
+                    element={
+                        <PrivateRoute>
+                            <Watchlist watchlist={watchlist} userId={userId} />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/editprofile"
+                    element={
+                        <PrivateRoute>
+                            <EditProfile />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/settings"
+                    element={
+                        <PrivateRoute>
+                            <Settings />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/stock/:symbol"
+                    element={
+                        <PrivateRoute>
+                            <StockDetail />
+                        </PrivateRoute>
+                    }
+                />
 
-                    <Route path="/stock/:symbol" element={<StockDetail />} />
-                    <Route path="/editprofile" element={<EditProfile />} />
                     <Route path="/legal" element={<Legal />} />
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/privacypolicy" element={<PrivacyPolicy />} />
