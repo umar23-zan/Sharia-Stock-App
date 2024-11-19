@@ -212,11 +212,12 @@
   display: flex;
   flex-direction: column; 
   justify-content: center;
+  height: 60vh;
   /* height: 50vh; */
 }
 .stock-container {
-  display: flex;
-  flex-direction: column; 
+   display: flex;
+   flex-direction: column; 
    padding: 20px;
    text-align: center;
    align-items: center;
@@ -228,6 +229,7 @@
   margin: 20px 0;
   font-size: 2rem;
   color: #003366;
+ 
 }
 
 /* Search Form */
@@ -238,9 +240,10 @@
 }
 
 .search-input {
-  padding: 10px;
-  width: 500px;
-  height: 20px;
+  justify-content: center;
+  padding: 15px;
+  width: 220px;
+  height: 30px;
   border: 1px solid #ccc;
   border-radius: 500px;
   font-size: 1rem;
@@ -455,4 +458,3 @@
     font-size: xx-small;
   }
 }
-

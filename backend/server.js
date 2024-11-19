@@ -150,6 +150,29 @@ app.delete('/api/watchlist/:symbol', async (req, res) => {
   }
 });
 
+// Get portfolio data for a user
+app.get('/api/portfolio/:email', async (req, res) => {
+  try {
+    const portfolio = await Portfolio.find({ userId: req.params.email });
+    res.json(portfolio);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+// Get watchlist data for a user
+app.get('/api/watchlist/:email', async (req, res) => {
+  try {
+    const watchlist = await Watchlist.find({ userId: req.params.email });
+    res.json(watchlist);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
 // const path = require('path');
 // app.use(express.static(path.join(__dirname, '../frontend/build')));
 // app.get('*', (req, res) => {

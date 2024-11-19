@@ -68,6 +68,11 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
   const [user, setUser] = useState({});
   const [isAddedToPortfolio, setIsAddedToPortfolio] = useState(false);
   const [isAddedToWatchlist, setIsAddedToWatchlist] = useState(false);
+  const [currentView, setCurrentView] = useState('watchlist');
+
+// Define state variables
+const [portfolio, setPortfolio] = useState([]);
+const [watchlist, setWatchlist] = useState([]);
 
 
   const navigate = useNavigate(); // Initialize useNavigate
@@ -137,6 +142,11 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
         try {
           const userData = await getUserData(email);
           setUser(userData);
+          // Fetch portfolio and watchlist data
+        const portfolioResponse = await axios.get(`/api/portfolio/${email}`);
+        const watchlistResponse = await axios.get(`/api/watchlist/${email}`);
+        setPortfolio(portfolioResponse.data || []); // Example state: portfolio
+        setWatchlist(watchlistResponse.data || []); // Example state: watchlist
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -144,6 +154,21 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
       fetchData();
     }
   }, [email]);
+
+  const checkPortfolio = (symbol) => {
+    return Array.isArray(portfolio) && portfolio.some((item) => item.symbol === symbol);
+  };
+  
+  const checkWatchlist = (symbol) => {
+    return Array.isArray(watchlist) && watchlist.some((item) => item.symbol === symbol);
+  };
+  // Update UI based on portfolio/watchlist status
+  useEffect(() => {
+    if (stock) {
+      setIsAddedToPortfolio(checkPortfolio(stock.symbol));
+      setIsAddedToWatchlist(checkWatchlist(stock.symbol));
+    }
+  }, [stock]);
 
   const fetchStockData = async (symbol) => {
     setLoading(true);
@@ -219,6 +244,13 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
       return;
     }
 
+    // Check if the stock is already in the portfolio
+  const isStockInPortfolio = checkPortfolio(stock.symbol);
+  if (isStockInPortfolio) {
+    setError('Stock is already in your portfolio');
+    return;
+  }
+
     try {
       await axios.post('api/portfolio', {
         userId: user.email,
@@ -231,6 +263,8 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
 
       addToPortfolio(stock);
       setIsAddedToPortfolio(true);
+      // Update the portfolio state directly after successful addition
+    setPortfolio((prevPortfolio) => [...prevPortfolio, stock]);
     } catch (error) {
       console.error('Error adding to portfolio:', error);
       setError('Error adding stock to portfolio');
@@ -249,6 +283,13 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
       setError("Stock data is required to add to watchlist");
       return;
     }
+
+     // Check if the stock is already in the watchlist
+  const isStockInWatchlist = checkWatchlist(stock.symbol);
+  if (isStockInWatchlist) {
+    setError('Stock is already in your watchlist');
+    return;
+  }
   
     try {
       await axios.post('api/watchlist', {
@@ -274,6 +315,18 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
   //   navigate(`/stock/${symbol}`, { state: { name } });
   // }
 
+  const removeFromPortfolio = (stockToRemove) => {
+    setPortfolio((prevPortfolio) =>
+      prevPortfolio.filter((stock) => stock.symbol !== stockToRemove.symbol)
+    );
+  };
+  
+  const removeFromWatchlist = (stockToRemove) => {
+    setWatchlist((prevWatchlist) =>
+      prevWatchlist.filter((stock) => stock.symbol !== stockToRemove.symbol)
+    );
+  };
+
   const handleNavigateToStockDetails = (symbol) => {
     const company = companies.find((c) => c.symbol === `${symbol}.NSE`);
     if (company) {
@@ -284,7 +337,10 @@ const Dashboard = ({ addToPortfolio, addToWatchlist }) => {
     }
   };
   
-
+// Function to handle the view switch
+const handleViewSwitch = (view) => {
+  setCurrentView(view); // Update the current view (watchlist or portfolio)
+};
   return (
     <div className="App">
      <Header />

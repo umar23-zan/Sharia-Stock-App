@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        await mongoose.connect("mongodb://mongo-db/ShariaStock", {
+        await mongoose.connect("mongodb+srv://umar:umar444@authentication-app.ted5m.mongodb.net/authdb?retryWrites=true&w=majority", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
@@ -13,3 +13,8 @@ const connectDB = async () => {
     }
 };
 module.exports = connectDB;
+
+
+//mongodb+srv://umar:umar444@authentication-app.ted5m.mongodb.net/authdb?retryWrites=true&w=majority
+
+//mongodb://mongo-db/ShariaStock

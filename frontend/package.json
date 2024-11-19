@@ -43,5 +43,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://react-server:5000"
+  "proxy": "http://localhost:5000"
 }
+
+

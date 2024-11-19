@@ -42,13 +42,17 @@ const Login = () => {
             navigate('/Dashboard');  // Ensure route is defined
             setFormData({ email: '', password: '' });  // Clear form after success
         } catch (err) {
-            //setAlert({ type: 'error', message: 'Login failed. Please try again.' });
-            setError(err.response?.data?.msg || 'Error logging in');
-            console.error(error.response.data);
-        }finally {
-            setLoading(false);
+          // Check if the error is a 400 response and set a custom error message
+          if (err.response && err.response.status === 400) {
+              setError('Invalid credentials');  // Custom error message
+          } else {
+              setError('Something went wrong. Please try again later.');
           }
-    };
+          // Do not log the error to the console
+      } finally {
+          setLoading(false);
+      }
+  };
 
     return (
         <div>

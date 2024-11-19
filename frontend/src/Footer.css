@@ -1,32 +1,50 @@
+/* Prevent horizontal and vertical scrolling */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Ensure body takes up full height and keeps footer fixed at the bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Footer */
 .footer {
   display: flex;
   justify-content: space-between; /* Space between left, center, and right sections */
-  align-items: flex-start; /* Align items at the start */
+  align-items: center; /* Align items vertically at the center */
   background-color: #002d62;
   color: white;
   padding: 10px; /* Reduced padding */
-  position: relative;
-  top: 125px;
-  bottom: 0;
+  position: sticky; /* Fixed at the bottom of the page */
+  bottom: 0; /* Always at the bottom */
   left: 0;
   right: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it stays on top of other content */
 }
 
+/* Footer Sections */
+.footer-left,
+.footer-center,
+.footer-right {
+  display: flex;
+  flex-direction: column; /* Stack elements in each section */
+  align-items: center; /* Center the elements in each section */
+}
+
+/* Adjustments for specific sections */
 .footer-left {
-  display: flex;
-  flex-direction: column; /* Stack newsletter and copyright */
-  align-items: center; /* Center the newsletter */
-}
-
-.footer-center {
-  display: flex;
-  flex-direction: column; /* Stack company info */
-  align-items: center; /* Center the company info */
+  align-items: flex-start; /* Align left side content to the start */
 }
 
 .footer-right {
-  display: flex;
-  flex-direction: column; /* Stack social links */
   align-items: flex-start; /* Align social links to the left */
   margin-right: 50px;
 }
@@ -35,6 +53,7 @@
   margin-bottom: 10px; /* Space between newsletter and copyright */
 }
 
+/* List Styles */
 .company-info ul,
 .footer-right ul {
   list-style: none;
@@ -57,7 +76,7 @@
 
 .footer-center ul li {
   cursor: pointer; /* Change the cursor to pointer */
-  list-style: none; /* Remove bullet points if you want */
+  list-style: none; /* Remove bullet points */
 }
 
 .footer-center ul li:hover {
@@ -70,11 +89,10 @@
 }
 
 .footer-right a:hover {
-  text-decoration: underline; /* Optional: underline on hover for better UX */
+  text-decoration: underline; /* Optional: underline on hover */
 }
 
-
-/* profile.css */
+/* Profile Styles */
 .newsletter {
   margin: 20px 0;
 }
@@ -99,11 +117,17 @@
   background-color: #0056b3; /* Darker shade for hover effect */
 }
 
-/* media query */
+/* Media Query for Small Screens */
+@media (max-width: 768px) {
+  .footer {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
 
-@media (max-width:768px){
- .footer{
-  display: flex;
-  flex-wrap: wrap;
- } 
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    align-items: center; /* Center content on smaller screens */
+    margin-bottom: 10px; /* Add margin between footer sections */
+  }
 }
