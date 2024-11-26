@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './contactus.css';
+import back from '../images/ShariaStocks-logo/back.svg'
+import { useNavigate } from 'react-router-dom';
 
 const ContactUs = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -37,74 +40,84 @@ const ContactUs = () => {
   
 
   return (
-    <div className="contact-page">
-      <div className="left-section">
-        <div className="text-container">
-          <h1>We'd love to</h1>
-          <h1>hear from you</h1>
+    
+      
+      <div className="contact-page">
+        <div className="left-section">
+          <div className='back-btn-section'>
+            <img className='back-btn' src={back} alt="Go back" onClick={() => {
+                 navigate(-1)
+             }}/>
+          </div>
+        
+          <div className="text-container">
+            <h1>We'd love to</h1>
+            <h1>hear from you</h1>
+          </div>
+          <div className="circle-design"></div>
         </div>
-        <div className="circle-design"></div>
-      </div>
 
-      <div className="right-section">
-        <h2>Contact us</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="name-fields">
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={formData.firstName}
+        <div className="right-section">
+          <h2>Contact us</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="name-fields">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className='contact-details'>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Enter your phone number"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <textarea
+              name="message"
+              placeholder="Enter your message"
+              value={formData.message}
               onChange={handleChange}
               required
             />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={handleChange}
-            />
+            <button type="submit">Submit →</button>
+          </form>
+          {/* After the form and submit button */}
+          <div className="email-section">
+            <p className="email-label">Email us</p>
+            <p>enquiries@shariastock.com</p>
           </div>
-          <div className='contact-details'>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Enter your phone number"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <textarea
-            name="message"
-            placeholder="Enter your message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit">Submit →</button>
-        </form>
-        {/* After the form and submit button */}
-        <div className="email-section">
-          <p className="email-label">Email us</p>
-          <p>enquiries@shariastock.com</p>
-        </div>
 
-        <div className="social-links">
-          <a href="mailto:enquiries@shariastock.com" target="_blank" rel="noopener noreferrer">enquiries@shariastock.com</a>
-          <a href="https://www.instagram.com/yourusername" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://www.facebook.com/yourusername" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <div className="social-links">
+            <a href="mailto:enquiries@shariastock.com" target="_blank" rel="noopener noreferrer">enquiries@shariastock.com</a>
+            <a href="https://www.instagram.com/yourusername" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.facebook.com/yourusername" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </div>
         </div>
       </div>
-    </div>
+    
+    
   );
 };
 
