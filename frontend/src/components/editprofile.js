@@ -90,11 +90,48 @@ const EditProfile = () => {
         }));
     };
 
+    // const handleFileChange = (e) => {
+    //     const file = e.target.files[0];
+    //     setProfilePicture(file);
+    //     setProfilePreview(URL.createObjectURL(file));
+    // };
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        setProfilePicture(file);
-        setProfilePreview(URL.createObjectURL(file));
+        const maxFileSize = 2 * 1024 * 1024; // 2 MB
+        const validFileTypes = ['image/jpeg', 'image/png'];
+    
+        if (file) {
+            if (!validFileTypes.includes(file.type)) {
+                setErrors((prevState) => ({
+                    ...prevState,
+                    profilePicture: 'Only JPEG and PNG files are allowed.',
+                }));
+                setProfilePicture(null);
+                setProfilePreview(null);
+                return;
+            }
+    
+            if (file.size > maxFileSize) {
+                setErrors((prevState) => ({
+                    ...prevState,
+                    profilePicture: 'File size must not exceed 2 MB.',
+                }));
+                setProfilePicture(null);
+                setProfilePreview(null);
+                return;
+            }
+    
+            setErrors((prevState) => ({
+                ...prevState,
+                profilePicture: '', // Clear previous errors
+            }));
+    
+            setProfilePicture(file);
+            setProfilePreview(URL.createObjectURL(file));
+        }
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -179,6 +216,7 @@ const EditProfile = () => {
                                 <label htmlFor="profilePicture" className="image-upload-button">
                                     Change Image
                                 </label>
+                                {errors.profilePicture && <p className="error">{errors.profilePicture}</p>}
                             </div>
                              
                         </div>
