@@ -137,7 +137,7 @@ const EditProfile = () => {
     
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const newErrors = {};
         Object.keys(formData).forEach((key) => {
             const error = validateField(key, formData[key]);
@@ -156,6 +156,7 @@ const EditProfile = () => {
             const updatedUserData = await getUserData(email);
             setUser(updatedUserData);
             setProfilePreview(updatedUserData.profilePicture ? `${updatedUserData.profilePicture}` : account);
+            alert('Profile Updated Successfully')
         } else {
             setErrors(newErrors);
         }
