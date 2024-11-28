@@ -50,8 +50,11 @@ const EditProfile = () => {
                 if (!/^[A-Za-z\s]+$/.test(value)) return 'Name must only contain letters and spaces.';
                 if (value.length > 15) return 'Name must not exceed 15 characters.';
                 return '';
-            case 'contactNumber':
-                return /^\d+$/.test(value) ? '' : 'Contact number must only contain digits.';
+                case 'contactNumber':
+                    if (!/^\d{10}$/.test(value)) return 'Contact number must be exactly 10 digits and contain only integers.';
+                    return '';
+                
+                
             case 'doorNumber':
                 return value.length < 1 ? 'Door number is required' : '';
             case 'streetName':

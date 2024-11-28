@@ -87,8 +87,7 @@ const Header = () => {
           
         </div>
           <div className='logout-section'>
-            <img src={logout} alt="logout" />
-          <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          <button className="logout-btn" onClick={handleLogout}><img src={logout} alt="logout" />Logout</button>
           </div>
           
         </div>
